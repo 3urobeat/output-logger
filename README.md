@@ -20,7 +20,7 @@ This example will output the `info` message `My message` from the file `index.js
 
 ## Syntax
 ### logger(type, origin, message, nodate, remove)
-- `type` - String that determines the type of the log message. Can be `info`, `warn`, `error` or an empty string to not use the field.  
+- `type` - String that determines the type of the log message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.  
 - `origin` - String that will show the origin file of your message. Can be an empty string to not use the field.  
 - `message` - String that is your message.  
 - `nodate` - Boolean that determines if your message should have no date. If false or undefined the date format will be `YYYY-MM-DD HH:MM:SS`  
