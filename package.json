@@ -2,6 +2,13 @@
   "name": "output-logger",
   "version": "1.0.0",
   "description": "A simple but effective node.js logging library with file output.",
+  "keywords": [
+    "logging",
+    "file logging",
+    "logger",
+    "file logger",
+    "console.log" 
+	],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +17,9 @@
     "type": "git",
     "url": "git+https://github.com/HerrEurobeat/output-logger.git"
   },
+  "publishConfig": {
+    "registry": "https://registry-url"
+  }, 
   "author": "3urobeat",
   "license": "MIT",
   "bugs": {
