@@ -1,6 +1,8 @@
+//https://github.com/HerrEurobeat/output-logger
+
 /**
  * Logs your message to the terminal and to the output.txt file.
- * @param {String} type Type of your message. Can be 'info', 'warn', 'error' or an empty string to not use the field.
+ * @param {String} type Type of your message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.
  * @param {String} origin Origin file of your message. Can be empty to not use the field.
  * @param {String} str Your message as a string.
  * @param {Boolean} nodate Set to true to remove date from message.
@@ -13,19 +15,23 @@ function logger(type, origin, str, nodate, remove) {
     const fs       = require("fs")
 
     var str = String(str)
-    if (str.toLowerCase().includes("error")) { 
-        var str = `\x1b[31m${str}\x1b[0m`
-    }
 
     //Define type
-    if (type == 'info') {
-        var typestr = `\x1b[96mINFO`
-    } else if (type == 'warn') {
-        var typestr = `\x1b[31mWARN`
-    } else if (type == 'error') {
-        var typestr = `\x1b[31m\x1b[7mERROR\x1b[0m\x1b[31m`
-    } else {
-        var typestr = ''
+    switch (type.toLowerCase()) {
+        case 'info':
+            var typestr = `\x1b[96mINFO`
+            break;
+        case 'warn':
+            var typestr = `\x1b[31mWARN`
+            break;
+        case 'error':
+            var typestr = `\x1b[31m\x1b[7mERROR\x1b[0m\x1b[31m`
+            break;
+        case 'debug':
+            var typestr = `\x1b[36m\x1b[7mDEBUG\x1b[0m`
+            break;
+        default:
+            var typestr = ''
     }
 
     //Define origin
@@ -68,10 +74,10 @@ function logger(type, origin, str, nodate, remove) {
     
     //Remove color codes from the string which we want to write to the text file
     fs.appendFileSync(`./output.txt`, string.replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') + '\n', err => { //Regex Credit: https://github.com/Filirom1/stripcolorcodes
-        if(err) console.log('[logger] appendFileSync error: ' + err) 
+        if(err) console.log('[logger] Error appending log message to output.txt: ' + err) 
     }) 
 
-    return string; //Return String, maybe it is useful for the calling file
+    return string; //Return String, maybe it is useful for the caller
 }
 
 module.exports.logger = logger; //Export our function so that the user can import the library
