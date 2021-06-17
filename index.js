@@ -1,5 +1,13 @@
-//https://github.com/HerrEurobeat/output-logger
+//Source code: https://github.com/HerrEurobeat/output-logger
 
+//Define default options to use if the user doesn't provide them
+var options = {
+    msgstructure: "",
+    outputfile: "./output.txt"
+}
+
+
+//logger function has no name to reduce clutter when using and avoid the need of defining an alias or whatever
 /**
  * Logs your message to the terminal and to the output.txt file.
  * @param {String} type Type of your message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.
@@ -9,7 +17,7 @@
  * @param {Boolean} remove Set to true to let next message erase this one. Doesn't affect output.txt.
  * @returns 
  */
-function logger(type, origin, str, nodate, remove) {
+ module.exports = function (type, origin, str, nodate, remove) {
 
     const readline = require("readline")
     const fs       = require("fs")
@@ -80,4 +88,12 @@ function logger(type, origin, str, nodate, remove) {
     return string; //Return String, maybe it is useful for the caller
 }
 
-module.exports.logger = logger; //Export our function so that the user can import the library
+
+//Define function that can be called to let the user define options
+/**
+ * Provide custom options if you wish
+ * @param {Object} customOptions Please see the docs: https://github.com/HerrEurobeat/output-logger#options
+ */
+module.exports.options = function optionsFunc(customOptions) { //Export the options function to make it call-able but under a different name to not conflict with options Object
+    if (customOptions) options = customOptions //overwrite default options if not undefined
+}
