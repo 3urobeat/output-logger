@@ -1,31 +1,38 @@
 //Source code: https://github.com/HerrEurobeat/output-logger
 
+const readline = require("readline")
+const fs       = require("fs")
+
+
 //Define default options to use if the user doesn't provide them
 var options = {
     msgstructure: "[type | origin] [date] message",
+    paramstructure: ["type", "origin", "str", "nodate", "remove"],
     outputfile: "./output.txt"
 }
 
 
 //logger function has no name to reduce clutter when using and avoid the need of defining an alias or whatever
 /**
- * Logs your message to the terminal and to the output.txt file.
- * @param {String} type Type of your message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.
- * @param {String} origin Origin file of your message. Can be empty to not use the field.
- * @param {String} str Your message as a string.
- * @param {Boolean} nodate Set to true to remove date from message.
- * @param {Boolean} remove Set to true to let next message erase this one. Doesn't affect output.txt.
- * @returns 
+ * Logs your message to the terminal and to your output file. The order of parameters depends on your paramstructure. If you are using the default values please see here: https://github.com/HerrEurobeat/output-logger#functions
+ * @returns {String} The finished message
  */
-module.exports = function (type, origin, str, nodate, remove) {
+module.exports = function () {
+    var args = [];
+    for (var i = 0; i < arguments.length; ++i) args[i] = arguments[i]; //Use 'arguments' to basically have unlimited parameters. Credit: https://stackoverflow.com/a/6396066
 
-    const readline = require("readline")
-    const fs       = require("fs")
+    //map function parameters to paramstructure
+    var params = {}
+    args.forEach((e, i) => {
+        if (i + 1 > options.paramstructure.length) return; //should probably print error message later on
 
-    var str = String(str)
+        params[options.paramstructure[i]] = e
+    })
+
+    var str = String(params.str)
 
     //Define type
-    switch (type.toLowerCase()) {
+    switch (params.type.toLowerCase()) {
         case 'info':
             var typecolor = "\x1b[96m"
             var typestr = `${typecolor}INFO\x1b[0m`
@@ -50,14 +57,14 @@ module.exports = function (type, origin, str, nodate, remove) {
     }
 
     //Define origin
-    if (origin != "") {
-        var originstr = `${typecolor}${origin}\x1b[0m` 
+    if (params.origin && params.origin != "") {
+        var originstr = `${typecolor}${params.origin}\x1b[0m` 
     } else {
         var originstr = ''
     }
 
     //Add date or don't
-    if (nodate) var date = '';
+    if (params.nodate) var date = '';
         else var date = `\x1b[96m${(new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().replace(/T/, ' ').replace(/\..+/, '')}\x1b[0m`  
 
     //Put it together
@@ -70,7 +77,7 @@ module.exports = function (type, origin, str, nodate, remove) {
     //Clear line and print message with remove or without
     readline.clearLine(process.stdout, 0) //0 clears entire line
 
-    if (remove) process.stdout.write(`${string}\r`)
+    if (params.remove) process.stdout.write(`${string}\r`)
         else console.log(`${string}`) 
        
     //Write message to file
