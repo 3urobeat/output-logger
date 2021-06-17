@@ -65,7 +65,7 @@ module.exports = function (type, origin, str, nodate, remove) {
 
     //Check for empty brackets and remove them
     var string = string.replace(/ \| ]/g, "]").replace(/\[ \| /g, "[").replace(/\[\] /g, "").replace(/ \[\]/g, "") //this probably needs to be updated in a future version to work better for edge cases
-    var string = string.replace(/ \| )/g, ")").replace(/\( \| /g, "(").replace(/\(\) /g, "").replace(/ \(\)/g, "")
+    var string = string.replace(/ \| \)/g, ")").replace(/\( \| /g, "(").replace(/\(\) /g, "").replace(/ \(\)/g, "")
 
     //Clear line and print message with remove or without
     readline.clearLine(process.stdout, 0) //0 clears entire line
