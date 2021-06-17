@@ -1,7 +1,8 @@
 name: npm-publish # Credit: https://github.com/formium/tsdx/issues/854#issuecomment-800112282 (modified to run on release)
-on:
-  release:
-    types: [created]
+on:  
+  push:
+    tags:
+      - '*'
 jobs:
   npm-publish:
     name: npm-publish
