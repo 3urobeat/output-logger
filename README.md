@@ -55,5 +55,7 @@ If you don't provide a specific value then the corresponding default value will 
 String that contains supported keywords that will be replaced by the value you give them when calling the logging function. Take a look at the example above where I listed the default values to understand.  
 This allows you to customize the structure of your log message.  
 
+> Note: Please only use square or round brackets to surround keywords and pipes between keywords inside brackets as of now.
+
 ### outputfile  
 String which points to the file the library should write the output to (path). Provide the option but leave the string empty to disable the feature.  
