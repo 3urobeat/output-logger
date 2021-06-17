@@ -17,7 +17,7 @@ var options = {
  * @param {Boolean} remove Set to true to let next message erase this one. Doesn't affect output.txt.
  * @returns 
  */
- module.exports = function (type, origin, str, nodate, remove) {
+module.exports = function (type, origin, str, nodate, remove) {
 
     const readline = require("readline")
     const fs       = require("fs")
@@ -80,10 +80,12 @@ var options = {
         console.log(`${string}`) 
     }
     
-    //Remove color codes from the string which we want to write to the text file
-    fs.appendFileSync(`./output.txt`, string.replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') + '\n', err => { //Regex Credit: https://github.com/Filirom1/stripcolorcodes
-        if(err) console.log('[logger] Error appending log message to output.txt: ' + err) 
-    }) 
+    if (options.outputfile && options.outputfile != "") { //only write to file if the user didn't turn off the feature
+        //Remove color codes from the string which we want to write to the text file
+        fs.appendFileSync(options.outputfile, string.replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') + '\n', err => { //Regex Credit: https://github.com/Filirom1/stripcolorcodes
+            if(err) console.log(`[logger] Error appending log message to ${options.outputfile}: ${err}`) 
+        }) 
+    }
 
     return string; //Return String, maybe it is useful for the caller
 }
@@ -95,5 +97,9 @@ var options = {
  * @param {Object} customOptions Please see the docs: https://github.com/HerrEurobeat/output-logger#options
  */
 module.exports.options = function optionsFunc(customOptions) { //Export the options function to make it call-able but under a different name to not conflict with options Object
-    if (customOptions) options = customOptions //overwrite default options if not undefined
+    if (customOptions) {
+        Object.keys(customOptions).forEach(e => {
+            if (customOptions[e] != undefined && typeof(customOptions[e]) == typeof(options[e])) options[e] = customOptions[e] //overwrite the default option if not undefined and has the same data type
+        });
+    }
 }
