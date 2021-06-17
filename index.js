@@ -2,7 +2,7 @@
 
 //Define default options to use if the user doesn't provide them
 var options = {
-    msgstructure: "",
+    msgstructure: "[type | origin] [date] message",
     outputfile: "./output.txt"
 }
 
@@ -27,49 +27,44 @@ module.exports = function (type, origin, str, nodate, remove) {
     //Define type
     switch (type.toLowerCase()) {
         case 'info':
-            var typestr = `\x1b[96mINFO`
+            var typecolor = "\x1b[96m"
+            var typestr = `${typecolor}INFO\x1b[0m`
             break;
         case 'warn':
-            var typestr = `\x1b[31mWARN`
+            var typecolor = "\x1b[31m"
+            var typestr = `${typecolor}WARN\x1b[0m`
             break;
+        case 'err':
         case 'error':
-            var typestr = `\x1b[31m\x1b[7mERROR\x1b[0m\x1b[31m`
+            var typecolor = "\x1b[31m\x1b[7m"
+            var typestr = `${typecolor}ERROR\x1b[0m`
+            str = `\x1b[31m${str}\x1b[0m` //make the message red
             break;
         case 'debug':
-            var typestr = `\x1b[36m\x1b[7mDEBUG\x1b[0m`
+            var typecolor = "\x1b[36m\x1b[7m"
+            var typestr = `${typecolor}DEBUG\x1b[0m`
             break;
         default:
+            var typecolor = "\x1b[96m" //let's use this as default color
             var typestr = ''
     }
 
     //Define origin
     if (origin != "") {
-        if (typestr == "") var originstr = `\x1b[96m${origin}`
-            else var originstr = `${origin}` 
+        var originstr = `${typecolor}${origin}\x1b[0m` 
     } else {
         var originstr = ''
     }
 
     //Add date or don't
     if (nodate) var date = '';
-        else var date = `\x1b[96m[${(new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().replace(/T/, ' ').replace(/\..+/, '')}]\x1b[0m `
-
-    //Add filers
-    var filler1 = ""
-    var filler2 = ""
-    var filler3 = ""
-
-    if (typestr != "" || originstr != "") { 
-        filler1 = "["
-        filler3 = "\x1b[0m] " 
-    }
-
-    if (typestr != "" && originstr != "") {
-        filler2 = " | " 
-    }
+        else var date = `\x1b[96m${(new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().replace(/T/, ' ').replace(/\..+/, '')}\x1b[0m`  
 
     //Put it together
-    var string = `${filler1}${typestr}${filler2}${originstr}${filler3}${date}${str}`
+    var string = options.msgstructure.replace("type", typestr).replace("origin", originstr).replace("date", date).replace("message", str) //this is shitty code and needs to be changed in the a future version when introducing custom options
+
+    //Check for empty brackets and remove them
+    var string = string.replace(/ \| ]/g, "]").replace(/\[ \| /g, "[").replace(/\[\] /g, "") //this probably needs to be updated in a future version to work better for edge cases
 
     //Print message with remove or without
     if (remove) {
