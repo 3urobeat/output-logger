@@ -102,8 +102,13 @@ module.exports = function () {
 
 //Define function that can be called to let the user define options
 /**
- * Provide custom options if you wish
- * @param {Object} customOptions Please see the docs: https://github.com/HerrEurobeat/output-logger#options
+ * Provide custom options if you wish inside an `Object`.  
+ * Documentation with default values and examples: https://github.com/HerrEurobeat/output-logger#options-1  
+ *   
+ * Values that you can customize:  
+ * `msgstructure` - `String`: String containing keywords that will be replaced by your parameters when calling the logger function. Allows you to customize the structure of your log message.  
+ * `paramstrcuture` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
+ * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
  */
 module.exports.options = function optionsFunc(customOptions) { //Export the options function to make it call-able but under a different name to not conflict with options Object
     if (customOptions) {
