@@ -29,6 +29,8 @@ This example will output the `info` message `My message` from the file `index.js
 - `message` - String that is your message.  
 - `nodate` - Boolean that determines if your message should have no date. If false or undefined the date format will be `YYYY-MM-DD HH:MM:SS`  
 - `remove` - Boolean that determines if your message should be removed by the next line. The message will not be removed from the log file.  
+
+The order of the parameters above can be changed. Take a look at `paramstructure` below in the 'Options' section!  
   
 The message and the type & origin brackets will be colored accordingly to `type`. The date bracket will always be colored cyan.  
 This function has no name. To call it call the variable name under which you imported the library.  
