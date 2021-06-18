@@ -14,8 +14,16 @@ var options = {
 
 //logger function has no name to reduce clutter when using and avoid the need of defining an alias or whatever
 /**
- * Logs your message to the terminal and to your output file. The order of parameters depends on your paramstructure. If you are using the default values please see here: https://github.com/HerrEurobeat/output-logger#functions
- * @returns {String} The finished message
+ * Logs your message to the terminal and to your output file. The order of parameters depends on your paramstructure.  
+ * If you are using the default values please see here: https://github.com/HerrEurobeat/output-logger#functions  
+ *   
+ * Parameter types (in default order):  
+ * `type` - `String`: Type of your message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.  
+ * `origin` - `String`: Origin file of your message. Can be empty to not use the field.  
+ * `str` - `String`: Your message as a string.  
+ * `nodate` - `Boolean`: Set to true to remove date from message.  
+ * `remove` - `Boolean`: Set to true to let next message erase this one. Doesn't affect output.txt.  
+ * @returns {String} The finished message  
  */
 module.exports = function () {
     var args = [];
