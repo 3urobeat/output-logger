@@ -40,6 +40,8 @@ module.exports = function () {
     var str = String(params.str)
 
     //Define type
+    if (!params.type) params.type = "" //set type to empty string if it wasn't defined so that .toLowerCase() doesn't fail
+
     switch (params.type.toLowerCase()) {
         case 'info':
             var typecolor = "\x1b[96m"
@@ -107,7 +109,7 @@ module.exports = function () {
  *   
  * Values that you can customize:  
  * `msgstructure` - `String`: String containing keywords that will be replaced by your parameters when calling the logger function. Allows you to customize the structure of your log message.  
- * `paramstrcuture` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
+ * `paramstructure` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
  * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
  */
 module.exports.options = function optionsFunc(customOptions) { //Export the options function to make it call-able but under a different name to not conflict with options Object
