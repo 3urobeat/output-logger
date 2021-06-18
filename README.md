@@ -46,6 +46,7 @@ If you don't call this function after importing the library or you leave the obj
 ```
 defaultOptions = {
     msgstructure: "[type | origin] [date] message",
+    paramstructure: ["type", "origin", "str", "nodate", "remove"],
     outputfile: "./output.txt"
 }
 ```  
@@ -55,7 +56,16 @@ If you don't provide a specific value then the corresponding default value will 
 String that contains supported keywords that will be replaced by the value you give them when calling the logging function. Take a look at the example above where I listed the default values to understand.  
 This allows you to customize the structure of your log message.  
 
-> Note: Please only use square or round brackets to surround keywords and pipes between keywords inside brackets as of now.
+> Note: Please only use square or round brackets to surround keywords and pipes between keywords inside brackets as of now.  
+
+### paramstructure  
+Array that contains strings in the order you would like to have the parameters of the logger function. This allows you to prioritize parameters that you use often by being able to call them before others.  
+Take a look at the `defaultOptions` above to see all supported parameters. Shift around the array as you like to change the order.  
+If you don't provide all supported parameters then you won't be able to use the parameters you left out.  
+
+Example:  
+Setting the paramstructure like this: `paramstructure: ["str", "type", "origin"]`  
+...will now let you call the logger function like this: `logger("My message", "info", "index.js")`
 
 ### outputfile  
 String which points to the file the library should write the output to (path). Provide the option but leave the string empty to disable the feature.  
