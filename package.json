@@ -1,6 +1,6 @@
 {
   "name": "output-logger",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simple but effective node.js logging library with file output.",
   "keywords": [
     "npm",
