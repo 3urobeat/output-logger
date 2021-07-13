@@ -1,9 +1,10 @@
 # output-logger
-A simple but effective node.js logging library with file output.  
-
-Currently very basic to fit my needs across my projects but will be improved in the near future.  
+A simple but effective node.js logging library with file output & animation support.  
+Customizeable behaviour and even parameter structure!  
 
 ## Install
+> Note: If you are here from GitHub **Packages** please use the npm package with the command below instead of the scoped GitHub command from above. It won't work.  
+
 Open a terminal in your project folder and type:  
 `$ npm install output-logger`
 
@@ -29,6 +30,7 @@ This example will output the `info` message `My message` from the file `index.js
 - `message` - String that is your message.  
 - `nodate` - Boolean that determines if your message should have no date. If false or undefined the date format will be `YYYY-MM-DD HH:MM:SS`  
 - `remove` - Boolean that determines if your message should be removed by the next line. The message will not be removed from the log file.  
+- `animation` - Array containing strings for every frame your animation should have or a call to the function animation("name") to use one of the default animations.  
 
 The order of the parameters above can be changed. Take a look at `paramstructure` below in the 'Options' section!  
   
@@ -38,8 +40,19 @@ Example:
 ```
 var logger = require("output-logger")
 logger("info", "index.js", "My message")
-```
+```  
 
+### animation(name)
+- `name` - Can be `loading`, `waiting`, `bounce`, `progress`, `arrows` or `bouncearrows`.  
+  
+This function returns the array of the default animation you chose.  
+Provide the function call as the animation parameter to easily use it.  
+  
+### stopAnimation()
+No parameters.  
+Clears the current animation (if one is running).  
+You can also just call the logger function again and it will clear any current animation.  
+  
 ## Options   
 Call the function `options` and pass an options object to configure the behaviour of the library:  
 `logger.options({ outputfile: "./test.txt" })`  
@@ -47,9 +60,10 @@ Call the function `options` and pass an options object to configure the behaviou
 If you don't call this function after importing the library or you leave the object then these default options will be used:  
 ```
 defaultOptions = {
-    msgstructure: "[type | origin] [date] message",
-    paramstructure: ["type", "origin", "str", "nodate", "remove"],
-    outputfile: "./output.txt"
+    msgstructure: "[animation] [type | origin] [date] message",
+    paramstructure: ["type", "origin", "str", "nodate", "remove", "animation"],
+    outputfile: "./output.txt",
+    animationinterval: 750
 }
 ```  
 If you don't provide a specific value then the corresponding default value will be used.  
@@ -71,3 +85,6 @@ Setting the paramstructure like this: `paramstructure: ["str", "type", "origin"]
 
 ### outputfile  
 String which points to the file the library should write the output to (path). Provide the option but leave the string empty to disable the feature.  
+  
+### animationinterval
+Time in ms to wait between animation frames.  
