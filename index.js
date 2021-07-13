@@ -1,15 +1,28 @@
 //Source code: https://github.com/HerrEurobeat/output-logger
-
-const readline = require("readline")
-const fs       = require("fs")
-
+//This code isn't beautiful, don't expect too much, but it gets the job done for now.
 
 //Define default options to use if the user doesn't provide them
 var options = {
-    msgstructure: "[type | origin] [date] message",
-    paramstructure: ["type", "origin", "str", "nodate", "remove"],
-    outputfile: "./output.txt"
+    msgstructure: "[animation] [type | origin] [date] message",
+    paramstructure: ["type", "origin", "str", "nodate", "remove", "animation"],
+    outputfile: "./output.txt",
+    animationinterval: 750
 }
+
+
+//A few default animations
+var animations = {
+    loading: [" | ", " / ", " - ", " \\ ", " | ", " / ", " - ", " \\ "],
+    waiting: ["    ", ".   ", "..  ", "... ", "...."],
+    bounce: ["=     ", " =    ", "  =   ", "   =  ", "    = ", "     =", "    = ", "   =  ", "  =   ", " =    ", "=     "],
+    progress: ["     ", "█    ", "██   ", "███  ", "████ ", "█████"],
+    arrows: [">    ", ">>   ", ">>>  ", ">>>> ", ">>>>>"],
+    bouncearrow: [">    ", " >   ", "  >  ", "   > ", "    >", "    <", "    < ", "   <  ", "  <   ", " <    ", "<     "]
+}
+
+
+var activeanimation; //stores the active interval
+var lastanimation; //stores the last used animation
 
 
 //logger function has no name to reduce clutter when using and avoid the need of defining an alias or whatever
@@ -23,9 +36,14 @@ var options = {
  * `str` - `String`: Your message as a string.  
  * `nodate` - `Boolean`: Set to true to remove date from message.  
  * `remove` - `Boolean`: Set to true to let next message erase this one. Doesn't affect output.txt.  
+ * `animation` - `Array`: Set an animation that will be shown in the field 'animation'. Will be cleared by your next logger call or by calling logger.stopAnimation().  
  * @returns {String} The finished message  
  */
 module.exports = function () {
+    const readline = require("readline")
+    const fs       = require("fs")
+
+
     var args = [];
     for (var i = 0; i < arguments.length; ++i) args[i] = arguments[i]; //Use 'arguments' to basically have unlimited parameters. Credit: https://stackoverflow.com/a/6396066
 
@@ -77,28 +95,87 @@ module.exports = function () {
     if (params.nodate) var date = '';
         else var date = `\x1b[96m${(new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().replace(/T/, ' ').replace(/\..+/, '')}\x1b[0m`  
 
+    
+    if (params.animation && typeof params.animation == "object") {
+        var animation = params.animation
+    } else {
+        var animation = ""
+    }
+
+
     //Put it together
     var string = options.msgstructure.replace("type", typestr).replace("origin", originstr).replace("date", date).replace("message", str) //this is shitty code and needs to be changed in the a future version when introducing custom options
+
+    //Remove animation keyword if no animation was set
+    if (animation == "") var string = string.replace("animation", "")
 
     //Check for empty brackets and remove them
     var string = string.replace(/ \| ]/g, "]").replace(/\[ \| /g, "[").replace(/\[\] /g, "").replace(/ \[\]/g, "") //this probably needs to be updated in a future version to work better for edge cases
     var string = string.replace(/ \| \)/g, ")").replace(/\( \| /g, "(").replace(/\(\) /g, "").replace(/ \(\)/g, "")
 
-    //Clear line and print message with remove or without
+    //Clear line
     readline.clearLine(process.stdout, 0) //0 clears entire line
+    clearInterval(activeanimation) //clear any old interval
 
-    if (params.remove) process.stdout.write(`${string}\r`)
-        else console.log(`${string}`) 
-       
+
+    //Print message and start animation
+    if (animation != "") {
+        if (lastanimation && lastanimation == animation && i) { //if the last animation is the same then continue with the last used index to make the transition seamless
+            var i = i
+        } else {
+            var i = 0
+        }
+
+        lastanimation = animation
+        process.stdout.write(` ${string.replace("animation", animation[i])}\r`) //print with space at the beginning so that the cursor doesn't block
+
+        activeanimation = setInterval(() => {
+            i++
+
+            if (i > params.animation.length - 1) i = 0; //reset animation if last frame was reached
+
+            process.stdout.write(` ${string.replace("animation", animation[i])}\r`)
+        }, options.animationinterval);
+
+    } else {
+        if (params.remove) process.stdout.write(`${string}\r`)
+            else console.log(`${string}`)
+    }
+    
+        
     //Write message to file
     if (options.outputfile && options.outputfile != "") { //only write to file if the user didn't turn off the feature
         //Remove color codes from the string which we want to write to the text file
-        fs.appendFileSync(options.outputfile, string.replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') + '\n', err => { //Regex Credit: https://github.com/Filirom1/stripcolorcodes
+        fs.appendFileSync(options.outputfile, string.replace("animation", animation[0]).replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') + '\n', err => { //Regex Credit: https://github.com/Filirom1/stripcolorcodes
             if(err) console.log(`[logger] Error appending log message to ${options.outputfile}: ${err}`) 
         }) 
     }
 
     return string; //Return String, maybe it is useful for the caller
+}
+
+
+/**
+ * Returns one of the default animations
+ * @param {String} animation Valid animations: `loading`, `waiting`, `bounce`, `progress`
+ * @returns Array of the chosen animation
+ */
+module.exports.animation = (animation) => {
+    return animations[animation]
+}
+
+
+/**
+ * Stops any animation currently active
+ */
+module.exports.stopAnimation = () => {
+    const readline = require("readline")
+
+    clearInterval(activeanimation);
+
+    lastanimation = null //clear last animation so that the next animation always starts from index 0
+
+    readline.clearLine(process.stdout, 0) //0 clears entire line
 }
 
 
