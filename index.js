@@ -157,7 +157,7 @@ module.exports = function () {
 
 /**
  * Returns one of the default animations
- * @param {String} animation Valid animations: `loading`, `waiting`, `bounce`, `progress`
+ * @param {String} animation Valid animations: `loading`, `waiting`, `bounce`, `progress`, `arrows` or `bouncearrows`
  * @returns Array of the chosen animation
  */
 module.exports.animation = (animation) => {
