@@ -1,3 +1,4 @@
 output-logger.code-workspace
 node_modules
 output-logger-*.tgz
+test.js
