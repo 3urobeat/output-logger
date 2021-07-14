@@ -48,6 +48,8 @@ logger("info", "index.js", "My message")
 This function returns the array of the default animation you chose.  
 Provide the function call as the animation parameter to easily use it.  
   
+Example: `logger("info", "index.js", "my message", false, false, logger.animation("loading"))`  
+  
 ### stopAnimation()
 No parameters.  
 Clears the current animation (if one is running).  
@@ -63,7 +65,8 @@ defaultOptions = {
     msgstructure: "[animation] [type | origin] [date] message",
     paramstructure: ["type", "origin", "str", "nodate", "remove", "animation"],
     outputfile: "./output.txt",
-    animationinterval: 750
+    animationinterval: 750,
+    animationinoutputfile: false
 }
 ```  
 If you don't provide a specific value then the corresponding default value will be used.  
@@ -88,3 +91,6 @@ String which points to the file the library should write the output to (path). P
   
 ### animationinterval
 Time in ms to wait between animation frames.  
+  
+### animationinoutputfile
+Print the first frame of the used animation to the outputfile.
