@@ -6,7 +6,8 @@ var options = {
     msgstructure: "[animation] [type | origin] [date] message",
     paramstructure: ["type", "origin", "str", "nodate", "remove", "animation"],
     outputfile: "./output.txt",
-    animationinterval: 750
+    animationinterval: 750,
+    animationinoutputfile: false
 }
 
 
@@ -14,10 +15,10 @@ var options = {
 var animations = {
     loading: [" | ", " / ", " - ", " \\ ", " | ", " / ", " - ", " \\ "],
     waiting: ["    ", ".   ", "..  ", "... ", "...."],
-    bounce: ["=     ", " =    ", "  =   ", "   =  ", "    = ", "     =", "    = ", "   =  ", "  =   ", " =    ", "=     "],
+    bounce: ["=     ", " =    ", "  =   ", "   =  ", "    = ", "     =", "    = ", "   =  ", "  =   ", " =    "],
     progress: ["     ", "█    ", "██   ", "███  ", "████ ", "█████"],
     arrows: [">    ", ">>   ", ">>>  ", ">>>> ", ">>>>>"],
-    bouncearrow: [">    ", " >   ", "  >  ", "   > ", "    >", "    <", "    < ", "   <  ", "  <   ", " <    ", "<     "]
+    bouncearrow: [">    ", " >   ", "  >  ", "   > ", "    >", "    <", "   < ", "  <  ", " <   ", "<    "]
 }
 
 
@@ -47,6 +48,7 @@ module.exports = function () {
     var args = [];
     for (var i = 0; i < arguments.length; ++i) args[i] = arguments[i]; //Use 'arguments' to basically have unlimited parameters. Credit: https://stackoverflow.com/a/6396066
 
+
     //map function parameters to paramstructure
     var params = {}
     args.forEach((e, i) => {
@@ -55,7 +57,9 @@ module.exports = function () {
         params[options.paramstructure[i]] = e
     })
 
+
     var str = String(params.str)
+
 
     //Define type
     if (!params.type) params.type = "" //set type to empty string if it wasn't defined so that .toLowerCase() doesn't fail
@@ -84,12 +88,14 @@ module.exports = function () {
             var typestr = ''
     }
 
+
     //Define origin
     if (params.origin && params.origin != "") {
         var originstr = `${typecolor}${params.origin}\x1b[0m` 
     } else {
         var originstr = ''
     }
+
 
     //Add date or don't
     if (params.nodate) var date = '';
@@ -106,14 +112,18 @@ module.exports = function () {
     //Put it together
     var string = options.msgstructure.replace("type", typestr).replace("origin", originstr).replace("date", date).replace("message", str) //this is shitty code and needs to be changed in the a future version when introducing custom options
 
+
     //Remove animation keyword if no animation was set
     if (animation == "") var string = string.replace("animation", "")
+
 
     //Check for empty brackets and remove them
     var string = string.replace(/ \| ]/g, "]").replace(/\[ \| /g, "[").replace(/\[\] /g, "").replace(/ \[\]/g, "") //this probably needs to be updated in a future version to work better for edge cases
     var string = string.replace(/ \| \)/g, ")").replace(/\( \| /g, "(").replace(/\(\) /g, "").replace(/ \(\)/g, "")
 
+
     //Clear line
+    process.stdout.write("\x1B[?25h\r") //show the cursor again
     readline.clearLine(process.stdout, 0) //0 clears entire line
     clearInterval(activeanimation) //clear any old interval
 
@@ -127,14 +137,16 @@ module.exports = function () {
         }
 
         lastanimation = animation
-        process.stdout.write(` ${string.replace("animation", animation[i])}\r`) //print with space at the beginning so that the cursor doesn't block
+        process.stdout.write(`\x1B[?25l${string.replace("animation", animation[i])}\r`) //print with 'hide cursor' ascii code at the beginning
+        
 
         activeanimation = setInterval(() => {
             i++
 
             if (i > params.animation.length - 1) i = 0; //reset animation if last frame was reached
 
-            process.stdout.write(` ${string.replace("animation", animation[i])}\r`)
+            process.stdout.write(`\x1B[?25l${string.replace("animation", animation[i])}\r`)
+            
         }, options.animationinterval);
 
     } else {
@@ -145,8 +157,14 @@ module.exports = function () {
         
     //Write message to file
     if (options.outputfile && options.outputfile != "") { //only write to file if the user didn't turn off the feature
+        if (options.animationinoutputfile) {
+            var outputstring = string.replace("animation", animation[0])
+        } else {
+            var outputstring = string.replace("[animation] ", "")
+        }
+
         //Remove color codes from the string which we want to write to the text file
-        fs.appendFileSync(options.outputfile, string.replace("animation", animation[0]).replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') + '\n', err => { //Regex Credit: https://github.com/Filirom1/stripcolorcodes
+        fs.appendFileSync(options.outputfile, outputstring.replace(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/g, '') + '\n', err => { //Regex Credit: https://github.com/Filirom1/stripcolorcodes
             if(err) console.log(`[logger] Error appending log message to ${options.outputfile}: ${err}`) 
         }) 
     }
@@ -175,6 +193,7 @@ module.exports.stopAnimation = () => {
 
     lastanimation = null //clear last animation so that the next animation always starts from index 0
 
+    process.stdout.write("\x1B[?25h\r")
     readline.clearLine(process.stdout, 0) //0 clears entire line
 }
 
@@ -188,6 +207,8 @@ module.exports.stopAnimation = () => {
  * `msgstructure` - `String`: String containing keywords that will be replaced by your parameters when calling the logger function. Allows you to customize the structure of your log message.  
  * `paramstructure` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
  * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
+ * `animationinterval` - `Number`: Time in ms to wait between animation frames.  
+ * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.
  */
 module.exports.options = function optionsFunc(customOptions) { //Export the options function to make it call-able but under a different name to not conflict with options Object
     if (customOptions) {
@@ -196,3 +217,19 @@ module.exports.options = function optionsFunc(customOptions) { //Export the opti
         });
     }
 }
+
+
+//Attach exit event listeners in order to show cursor again if it was hidden by an animation
+process.on("SIGTERM", () => {
+    process.stdout.write("\x1B[?25h\r")
+    process.exit()
+});
+
+process.on("SIGINT", () => {
+    process.stdout.write("\x1B[?25h\r")
+    process.exit()
+});
+
+process.on("exit", () => {
+    process.stdout.write("\x1B[?25h\r")
+});
