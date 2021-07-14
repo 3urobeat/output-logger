@@ -24,6 +24,7 @@ var animations = {
 
 var activeanimation; //stores the active interval
 var lastanimation; //stores the last used animation
+var lastlogreprint;
 
 
 //logger function has no name to reduce clutter when using and avoid the need of defining an alias or whatever
@@ -122,10 +123,16 @@ module.exports = function () {
     var string = string.replace(/ \| \)/g, ")").replace(/\( \| /g, "(").replace(/\(\) /g, "").replace(/ \(\)/g, "")
 
 
-    //Clear line
+    //Clear line and reprint if last message lastlogreprint is true
     process.stdout.write("\x1B[?25h\r") //show the cursor again
     readline.clearLine(process.stdout, 0) //0 clears entire line
     clearInterval(activeanimation) //clear any old interval
+
+    //reprint last message if we are instructed to do so
+    if (lastlogreprint && lastlogreprint != "") {
+        console.log(lastlogreprint)
+        lastlogreprint = ""
+    }
 
 
     //Print message and start animation
@@ -138,7 +145,11 @@ module.exports = function () {
 
         lastanimation = animation
         process.stdout.write(`\x1B[?25l${string.replace("animation", animation[i])}\r`) //print with 'hide cursor' ascii code at the beginning
-        
+
+
+        //if this message should not be removed then we need to reprint it on the next call without the animation field
+        if (!params.remove) lastlogreprint = string.replace("[animation] ", "")
+
 
         activeanimation = setInterval(() => {
             i++
@@ -191,6 +202,12 @@ module.exports.stopAnimation = () => {
 
     clearInterval(activeanimation);
 
+    //reprint last message if we are instructed to do so
+    if (lastlogreprint && lastlogreprint != "") {
+        console.log(lastlogreprint)
+        lastlogreprint = ""
+    }
+
     lastanimation = null //clear last animation so that the next animation always starts from index 0
 
     process.stdout.write("\x1B[?25h\r")
@@ -222,14 +239,34 @@ module.exports.options = function optionsFunc(customOptions) { //Export the opti
 //Attach exit event listeners in order to show cursor again if it was hidden by an animation
 process.on("SIGTERM", () => {
     process.stdout.write("\x1B[?25h\r")
+
+    //reprint last message if we are instructed to do so
+    if (lastlogreprint && lastlogreprint != "") {
+        console.log(lastlogreprint)
+        lastlogreprint = ""
+    }
+
     process.exit()
 });
 
 process.on("SIGINT", () => {
     process.stdout.write("\x1B[?25h\r")
+
+    //reprint last message if we are instructed to do so
+    if (lastlogreprint && lastlogreprint != "") {
+        console.log(lastlogreprint)
+        lastlogreprint = ""
+    }
+
     process.exit()
 });
 
 process.on("exit", () => {
     process.stdout.write("\x1B[?25h\r")
+
+    //reprint last message if we are instructed to do so
+    if (lastlogreprint && lastlogreprint != "") {
+        console.log(lastlogreprint)
+        lastlogreprint = ""
+    }
 });
