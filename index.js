@@ -22,9 +22,11 @@ var animations = {
 }
 
 
+var i;
 var activeanimation; //stores the active interval
 var lastanimation; //stores the last used animation
 var lastlogreprint;
+var lastanimationrefresh; //save timestamp of when the last animation frame was printed
 
 
 //logger function has no name to reduce clutter when using and avoid the need of defining an alias or whatever
@@ -47,7 +49,7 @@ module.exports = function () {
 
 
     var args = [];
-    for (var i = 0; i < arguments.length; ++i) args[i] = arguments[i]; //Use 'arguments' to basically have unlimited parameters. Credit: https://stackoverflow.com/a/6396066
+    for (let j = 0; j < arguments.length; ++j) args[j] = arguments[j]; //Use 'arguments' to basically have unlimited parameters. Credit: https://stackoverflow.com/a/6396066
 
 
     //map function parameters to paramstructure
@@ -137,10 +139,22 @@ module.exports = function () {
 
     //Print message and start animation
     if (animation != "") {
-        if (lastanimation && lastanimation == animation && i) { //if the last animation is the same then continue with the last used index to make the transition seamless
-            var i = i
+        if (lastanimation && lastanimation == animation) { //if the last animation is the same then continue with the last used index to make the transition seamless
+
+            //Skip to next frame if last refresh is older than animationinterval to prevent animation frame getting stuck when this function is called more often than the interval would need to run at least once
+            //console.log(Date.now() - lastanimationrefresh)
+            if (Date.now() - lastanimationrefresh >= options.animationinterval) {
+                i++;
+
+                if (i > params.animation.length - 1) i = 0; //reset animation if last frame was reached
+
+                lastanimationrefresh = Date.now();
+            }
+
         } else {
-            var i = 0
+            i = 0
+
+            lastanimationrefresh = Date.now();
         }
 
         lastanimation = animation
@@ -157,6 +171,8 @@ module.exports = function () {
             if (i > params.animation.length - 1) i = 0; //reset animation if last frame was reached
 
             process.stdout.write(`\x1B[?25l${string.replace("animation", animation[i])}\r`)
+
+            lastanimationrefresh = Date.now();
             
         }, options.animationinterval);
 
