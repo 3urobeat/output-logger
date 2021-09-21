@@ -73,6 +73,7 @@ module.exports = function () {
             var typestr = `${typecolor}INFO\x1b[0m`
             break;
         case 'warn':
+        case 'warning':
             var typecolor = "\x1b[31m"
             var typestr = `${typecolor}WARN\x1b[0m`
             break;
