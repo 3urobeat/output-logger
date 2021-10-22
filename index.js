@@ -159,8 +159,9 @@ module.exports = function () {
         }
 
         lastanimation = animation
-        process.stdout.write(`\x1B[?25l${string.replace("animation", animation[i])}\r`) //print with 'hide cursor' ascii code at the beginning
 
+        var thisstr = `\x1B[?25l${string.replace("animation", animation[i])}`
+        process.stdout.write(thisstr.slice(0, process.stdout.columns) + "\r") //print with 'hide cursor' ascii code at the beginning and cut message to terminal width to prevent spam
 
         //if this message should not be removed then we need to reprint it on the next call without the animation field
         if (!params.remove) lastlogreprint = string.replace("[animation] ", "")
@@ -170,16 +171,23 @@ module.exports = function () {
             i++
 
             if (i > params.animation.length - 1) i = 0; //reset animation if last frame was reached
-
-            process.stdout.write(`\x1B[?25l${string.replace("animation", animation[i])}\r`)
+            
+            let thisstr = `\x1B[?25l${string.replace("animation", animation[i])}`
+            process.stdout.write(thisstr.slice(0, process.stdout.columns) + "\r") //cut message to terminal width to prevent spam
 
             lastanimationrefresh = Date.now();
             
         }, options.animationinterval);
 
     } else {
-        if (params.remove) process.stdout.write(`${string}\r`)
-            else console.log(`${string}`)
+        if (params.remove) {
+
+            let thisstr = `${string}`
+            process.stdout.write(thisstr.slice(0, process.stdout.columns) + "\r") //cut message to terminal width to prevent spam
+
+        } else {
+            console.log(`${string}`)
+        }
     }
     
         
