@@ -64,6 +64,10 @@ module.exports = function () {
     var str = String(params.str)
 
 
+    //Modify msgstructure to be able to differentiate between keyword and content when replacing later
+    options.msgstructure = options.msgstructure.replace("animation", "${#animation#}").replace("type", "${#type#}").replace("origin", "${#origin#}").replace("message", "${#message#}") //needs to be made modular with a loop later on
+
+
     //Define type
     if (!params.type) params.type = "" //set type to empty string if it wasn't defined so that .toLowerCase() doesn't fail
 
@@ -114,11 +118,11 @@ module.exports = function () {
 
 
     //Put it together
-    var string = options.msgstructure.replace("type", typestr).replace("origin", originstr).replace("date", date).replace("message", str) //this is shitty code and needs to be changed in the a future version when introducing custom options
+    var string = options.msgstructure.replace("${#type#}", typestr).replace("${#origin#}", originstr).replace("date", date).replace("${#message#}", str) //this is shitty code and needs to be changed in the a future version when introducing custom options
 
 
     //Remove animation keyword if no animation was set
-    if (animation == "") var string = string.replace("animation", "")
+    if (animation == "") var string = string.replace("${#animation#}", "")
 
 
     //Check for empty brackets and remove them
