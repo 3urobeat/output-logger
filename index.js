@@ -164,11 +164,11 @@ module.exports = function () {
 
         lastanimation = animation
 
-        var thisstr = `\x1B[?25l${string.replace("animation", animation[i])}`
+        var thisstr = `\x1B[?25l${string.replace("${#animation#}", animation[i])}`
         process.stdout.write(thisstr.slice(0, process.stdout.columns) + "\r") //print with 'hide cursor' ascii code at the beginning and cut message to terminal width to prevent spam
 
         //if this message should not be removed then we need to reprint it on the next call without the animation field
-        if (!params.remove) lastlogreprint = string.replace("[animation] ", "")
+        if (!params.remove) lastlogreprint = string.replace("[${#animation#}] ", "")
 
 
         activeanimation = setInterval(() => {
@@ -176,7 +176,7 @@ module.exports = function () {
 
             if (i > params.animation.length - 1) i = 0; //reset animation if last frame was reached
             
-            let thisstr = `\x1B[?25l${string.replace("animation", animation[i])}`
+            let thisstr = `\x1B[?25l${string.replace("${#animation#}", animation[i])}`
             process.stdout.write(thisstr.slice(0, process.stdout.columns) + "\r") //cut message to terminal width to prevent spam
 
             lastanimationrefresh = Date.now();
@@ -198,9 +198,9 @@ module.exports = function () {
     //Write message to file
     if (options.outputfile && options.outputfile != "") { //only write to file if the user didn't turn off the feature
         if (options.animationinoutputfile) {
-            var outputstring = string.replace("animation", animation[0])
+            var outputstring = string.replace("${#animation#}", animation[0])
         } else {
-            var outputstring = string.replace("[animation] ", "")
+            var outputstring = string.replace("[${#animation#}] ", "")
         }
 
         //Remove color codes from the string which we want to write to the text file
