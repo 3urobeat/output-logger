@@ -1,4 +1,20 @@
-//Source code: https://github.com/HerrEurobeat/output-logger
+/*
+ * File: index.js
+ * Project: output-logger
+ * Created Date: 15.06.2021 15:38:00
+ * Author: 3urobeat
+ * 
+ * Last Modified: 01.01.2022 16:00:57
+ * Modified By: 3urobeat
+ * 
+ * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
+ * 
+ * Licensed under the MIT license: https://opensource.org/licenses/MIT
+ * Permission is granted to use, copy, modify, and redistribute the work.
+ * Full license information available in the project LICENSE file.
+ */
+
+
 //This code isn't beautiful, don't expect too much, but it gets the job done for now.
 
 //Define default options to use if the user doesn't provide them
