@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 20.01.2022 13:23:57
+ * Last Modified: 20.01.2022 21:49:07
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -34,6 +34,20 @@ module.exports = function () {
 
     return require("./lib/logger.js").logger(args);
 }
+
+
+/**
+ * Provide custom options if you wish inside an `Object`.  
+ * Documentation with default values and examples: https://github.com/HerrEurobeat/output-logger#options-1  
+ * 
+ * Values that you can customize:  
+ * `msgstructure` - `String`: String containing keywords that will be replaced by your parameters when calling the logger function. Allows you to customize the structure of your log message.  
+ * `paramstructure` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
+ * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
+ * `animationinterval` - `Number`: Time in ms to wait between animation frames.  
+ * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.
+ */
+module.exports.options = require("./lib/options.js").options;
 
 
 /**
