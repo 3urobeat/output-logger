@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 20.01.2022 21:49:07
+ * Last Modified: 21.01.2022 13:11:15
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -37,6 +37,20 @@ module.exports = function () {
 
 
 /**
+ * Returns one of the default animations
+ * @param {String} animation Valid animations: `loading`, `waiting`, `bounce`, `progress`, `arrows` or `bouncearrows`
+ * @returns Array of the chosen animation
+ */
+module.exports.animation = require("./lib/animation.js").animation;
+
+
+/**
+ * Stops any animation currently active
+ */
+module.exports.stopAnimation = require("./lib/animation.js").stopAnimation;
+
+
+/**
  * Provide custom options if you wish inside an `Object`.  
  * Documentation with default values and examples: https://github.com/HerrEurobeat/output-logger#options-1  
  * 
@@ -48,6 +62,15 @@ module.exports = function () {
  * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.
  */
 module.exports.options = require("./lib/options.js").options;
+
+
+
+//Attach exit event listeners in order to show cursor again if it was hidden by an animation
+const handleExit = require("./lib/events.js").handleExit
+
+process.on("SIGTERM", () => handleExit(true)  );
+process.on("SIGINT",  () => handleExit(true)  );
+process.on("exit",    () => handleExit(false) );
 
 
 /**
