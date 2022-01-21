@@ -6,7 +6,7 @@ Customizeable behaviour and even parameter structure!
 > Note: If you are here from GitHub **Packages** please use the npm package with the command below instead of the scoped GitHub command from above. It won't work.  
 
 Open a terminal in your project folder and type:  
-`$ npm install output-logger`
+`npm install output-logger`
 
 ## Usage  
 Import it and call it:
@@ -62,8 +62,8 @@ Call the function `options` and pass an options object to configure the behaviou
 If you don't call this function after importing the library or you leave the object then these default options will be used:  
 ```
 defaultOptions = {
-    msgstructure: "[animation] [type | origin] [date] message",
-    paramstructure: ["type", "origin", "str", "nodate", "remove", "animation"],
+    msgstructure: `[${logger.Const.ANIMATION}] [${logger.Const.TYPE} | ${logger.Const.ORIGIN}] [${logger.Const.DATE}] ${logger.Const.MESSAGE}`,
+    paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION],
     outputfile: "./output.txt",
     animationinterval: 750,
     animationinoutputfile: false
@@ -78,12 +78,12 @@ This allows you to customize the structure of your log message.
 > Note: Please only use square or round brackets to surround keywords and pipes between keywords inside brackets as of now.  
 
 ### paramstructure  
-Array that contains strings in the order you would like to have the parameters of the logger function. This allows you to prioritize parameters that you use often by being able to call them before others.  
+Array that contains logger.Const strings in the order you would like to have the parameters of the logger function. This allows you to prioritize parameters that you use often by being able to call them before others.  
 Take a look at the `defaultOptions` above to see all supported parameters. Shift around the array as you like to change the order.  
 If you don't provide all supported parameters then you won't be able to use the parameters you left out.  
 
 Example:  
-Setting the paramstructure like this: `paramstructure: ["str", "type", "origin"]`  
+Setting the paramstructure like this: `paramstructure: [logger.Const.MESSAGE, logger.Const.TYPE, logger.Const.ORIGIN]`  
 ...will now let you call the logger function like this: `logger("My message", "info", "index.js")`
 
 ### outputfile  
