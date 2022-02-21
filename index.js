@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 21.01.2022 13:11:15
+ * Last Modified: 21.02.2022 13:12:58
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -60,6 +60,7 @@ module.exports.stopAnimation = require("./lib/animation.js").stopAnimation;
  * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
  * `animationinterval` - `Number`: Time in ms to wait between animation frames.  
  * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.
+ * `printdebug` - `Boolean`: Shows or hides log messages of type "debug".
  */
 module.exports.options = require("./lib/options.js").options;
 

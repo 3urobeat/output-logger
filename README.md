@@ -66,7 +66,8 @@ defaultOptions = {
     paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION],
     outputfile: "./output.txt",
     animationinterval: 750,
-    animationinoutputfile: false
+    animationinoutputfile: false,
+    printdebug: false
 }
 ```  
 If you don't provide a specific value then the corresponding default value will be used.  
@@ -94,3 +95,6 @@ Time in ms to wait between animation frames.
   
 ### animationinoutputfile
 Print the first frame of the used animation to the outputfile.
+
+### printdebug
+Shows or hides log messages of type "debug".
