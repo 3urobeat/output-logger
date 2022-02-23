@@ -1,5 +1,5 @@
 # output-logger
-A simple but effective node.js logging library with file output & animation support.  
+A simple but effective node.js logging library with terminal input, file output & animation support.  
 Customizeable behaviour and even parameter structure!  
 
 ## Install
@@ -65,6 +65,7 @@ defaultOptions = {
     msgstructure: `[${logger.Const.ANIMATION}] [${logger.Const.TYPE} | ${logger.Const.ORIGIN}] [${logger.Const.DATE}] ${logger.Const.MESSAGE}`,
     paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION],
     outputfile: "./output.txt",
+    exitmessage: "",
     animationinterval: 750,
     animationinoutputfile: false,
     printdebug: false
@@ -89,6 +90,9 @@ Setting the paramstructure like this: `paramstructure: [logger.Const.MESSAGE, lo
 
 ### outputfile  
 String which points to the file the library should write the output to (path). Provide the option but leave the string empty to disable the feature.  
+
+### exitmessage  
+A last message that will be printed when the application exits. Leave the string empty to disable the feature.  
   
 ### animationinterval
 Time in ms to wait between animation frames.  

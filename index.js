@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 23.02.2022 12:47:04
+ * Last Modified: 23.02.2022 13:55:31
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -67,9 +67,10 @@ module.exports.stopAnimation = require("./lib/animation.js").stopAnimation;
  * `msgstructure` - `String`: String containing keywords that will be replaced by your parameters when calling the logger function. Allows you to customize the structure of your log message.  
  * `paramstructure` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
  * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
+ * `exitmessage` - `String`: A last message that will be printed when the application exits. Leave the string empty to disable the feature.  
  * `animationinterval` - `Number`: Time in ms to wait between animation frames.  
- * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.
- * `printdebug` - `Boolean`: Shows or hides log messages of type "debug".
+ * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.  
+ * `printdebug` - `Boolean`: Shows or hides log messages of type "debug".  
  */
 module.exports.options = require("./lib/options.js").options;
 
