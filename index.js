@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 21.02.2022 13:12:58
+ * Last Modified: 23.02.2022 12:47:04
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -34,6 +34,15 @@ module.exports = function () {
 
     return require("./lib/logger.js").logger(args);
 }
+
+
+/**
+ * Waits for input from the terminal and returns it in a callback (logger() calls while waiting for input will be queued and logged after callback)
+ * @param {String} question Ask user something before waiting for input. Pass a line break manually at the end of your String if user input should appear below this message, it will otherwise appear behind it. Pass empty String to disable.
+ * @param {Number} timeout Time in ms after which a callback will be made if user does not respond. Pass 0 to disable (not recommended as your application can get stuck)
+ * @param {function} [callback] Called with `input` (String) on completion or `null` if user did not respond in timeout ms.
+ */
+module.exports.readInput = require("./lib/readInput.js").readInput;
 
 
 /**
