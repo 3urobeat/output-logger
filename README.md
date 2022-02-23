@@ -2,11 +2,15 @@
 A simple but effective node.js logging library with terminal input, file output & animation support.  
 Customizeable behaviour and even parameter structure!  
 
+&nbsp; 
+
 ## Install
 > Note: If you are here from GitHub **Packages** please use the npm package with the command below instead of the scoped GitHub command from above. It won't work.  
 
 Open a terminal in your project folder and type:  
 `npm install output-logger`
+
+&nbsp; 
 
 ## Usage  
 Import it and call it:
@@ -19,6 +23,8 @@ logger("info", "index.js", "My message", false, true)
 
 This example will output the `info` message `My message` from the file `index.js` with the current date and will get overwritten by the next new line in the terminal (but not replaced in the output.txt). The message will also be written to the file `output.txt` without any color codes:  
 `[2021-06-14 23:07:35] [INFO | index.js] My message`  
+
+&nbsp; 
 
 ## Functions
 ### options({})
@@ -54,7 +60,24 @@ Example: `logger("info", "index.js", "my message", false, false, logger.animatio
 No parameters.  
 Clears the current animation (if one is running).  
 You can also just call the logger function again and it will clear any current animation.  
+
+&nbsp; 
+
+## Colors
+You can easily use color codes in your message by using `logger.colors`!  
+Take a look at your IntelliSense popup or look at [the file directly](https://github.com/HerrEurobeat/output-logger/blob/master/lib/data/colors.js) to see all supported colors. 
+> `fg` means foreground, `bg` means background.  
   
+Usage Example:  
+```
+logger("info", "index.js", `${logger.colors.fgred}This message is red ${logger.colors.fggreen}but now it's green!`)
+```
+> Note: The library will always reset the color at the end of your message automatically. You can use `logger.colors.reset` to do this manually aswell.  
+  
+> Tip: Use \` to start and end your string (like in the example) to use variables inside Strings more easily using `${ }`.
+  
+&nbsp; 
+
 ## Options   
 Call the function `options` and pass an options object to configure the behaviour of the library:  
 `logger.options({ outputfile: "./test.txt" })`  

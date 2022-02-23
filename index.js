@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 23.02.2022 13:55:31
+ * Last Modified: 23.02.2022 14:40:48
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -88,3 +88,9 @@ process.on("exit",    () => handleExit(false) );
  * Constants for constructing message structure
  */
 module.exports.Const = require("./lib/data/constants.json");
+
+
+/**
+ * Color shortcuts to use color codes more easily in your strings
+ */
+module.exports.colors = require("./lib/data/colors.js");
