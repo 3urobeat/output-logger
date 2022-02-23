@@ -1,7 +1,7 @@
 {
   "name": "output-logger",
-  "version": "2.0.1",
-  "description": "A simple but effective node.js logging library with file output & animation support.",
+  "version": "2.1.0",
+  "description": "A simple but effective node.js logging library with terminal input, file output & animation support.",
   "keywords": [
     "npm",
     "library",
