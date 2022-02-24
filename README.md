@@ -61,6 +61,22 @@ No parameters.
 Clears the current animation (if one is running).  
 You can also just call the logger function again and it will clear any current animation.  
 
+### readInput(question, timeout, (callback))
+- `question` - (String) Ask user something before waiting for input. Pass a line break manually at the end of your String if user input should appear below this message, it will otherwise appear behind it. Pass empty String to disable.  
+- `timeout` - (Number in ms) Time in ms after which a callback will be made if user does not respond. Pass 0 to disable (not recommended as your application can get stuck)  
+- `callback` - (String or null) Called with `input` (String) on completion or `null` if user did not respond in timeout ms.  
+  
+Reads user input from the terminal and returns it in a callback. logger() calls while waiting for input will be queued and logged after callback was made.  
+  
+Example:   
+```
+logger.readInput("What is your name: ", 5000, (input) => {
+    if (input) logger("info", "index.js", "User said: " + input)
+        else logger("info", "index.js", "User did not respond after 5 seconds!")
+})
+```
+
+
 &nbsp; 
 
 ## Colors
