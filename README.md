@@ -66,7 +66,7 @@ You can also just call the logger function again and it will clear any current a
 ## Colors
 You can easily use color codes in your message by using `logger.colors`!  
 Take a look at your IntelliSense popup or look at [the file directly](https://github.com/HerrEurobeat/output-logger/blob/master/lib/data/colors.js) to see all supported colors. 
-> `fg` means foreground, `bg` means background.  
+> `fg` means foreground, `bg` means background. `brfg` and `brbg` mean bright foreground and bright background.  
   
 Usage Example:  
 ```
