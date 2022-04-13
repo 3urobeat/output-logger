@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 23.02.2022 14:40:48
+ * Last Modified: 13.04.2022 17:23:55
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -57,6 +57,32 @@ module.exports.animation = require("./lib/animation.js").animation;
  * Stops any animation currently active
  */
 module.exports.stopAnimation = require("./lib/animation.js").stopAnimation;
+
+
+/**
+ * Creates new empty progress bar or overwrites existing one
+ */
+module.exports.createProgressBar = require("./lib/progressBar.js").createProgressBar;
+
+
+/**
+ * Removes an active progress bar
+ */
+module.exports.removeProgressBar = require("./lib/progressBar.js").removeProgressBar;
+
+
+/**
+ * Increases progress of an active progress bar
+ * @param {Number} amount Amount in percent to increase the progress bar with
+ */
+module.exports.increaseProgressBar = require("./lib/progressBar.js").increaseProgressBar;
+
+
+/**
+ * Returns information about the active progress bar
+ * @returns Object containing information about the active progress bar
+ */
+module.exports.getProgressBar = require("./lib/progressBar.js").getProgressBar;
 
 
 /**
