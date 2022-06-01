@@ -1,5 +1,5 @@
 # output-logger
-A simple but effective node.js logging library with terminal input, file output & animation support.  
+A simple but effective node.js logging library with terminal input, file output, animation and progress bar support.  
 Customizeable behaviour and even parameter structure!  
 
 &nbsp; 
@@ -77,6 +77,32 @@ logger.readInput("What is your name: ", 5000, (input) => {
 })
 ```
 
+### createProgressBar()
+No parameters.  
+Creates new empty progress bar or overwrites existing one.  
+This function is optional. You can directly call `increaseProgressBar()` or `setProgressBar()` and it will create a new progress bar automatically if none currently exists.  
+  
+### removeProgressBar()
+No parameters.  
+Removes the active progress bar.  
+  
+### setProgressBar(amount)
+- `amount` - Number between 0 and 100 to set the progress bar to.  
+  
+Set progress of the active progress bar to a specific value.  
+> If no progress bar is currently active a new one will automatically be created.  
+
+### increaseProgressBar(amount)
+- `amount` - Number between 0 and 100 to increase the progress bar with.  
+  
+Increases progress of the active progress bar.  
+> If no progress bar is currently active a new one will automatically be created.  
+
+### getProgressBar()
+No parameters.  
+Returns these informations about the active progress bar as an Object:  
+- `progress` - Number between 0 and 100 representing the current progress of the active progress bar  
+  
 
 &nbsp; 
 

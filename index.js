@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 01.06.2022 13:08:29
+ * Last Modified: 01.06.2022 13:56:29
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -82,20 +82,20 @@ module.exports.createProgressBar = require("./lib/progressBar.js").createProgres
 
 
 /**
- * Removes an active progress bar
+ * Removes the active progress bar
  */
 module.exports.removeProgressBar = require("./lib/progressBar.js").removeProgressBar;
 
 
 /**
- * Set progress of an active progress bar to a specific value
+ * Set progress of the active progress bar to a specific value
  * @param {Number} amount Amount in percent to set the progress bar to
  */
 module.exports.setProgressBar = require("./lib/progressBar.js").setProgressBar;
 
 
 /**
- * Increases progress of an active progress bar
+ * Increases progress of the active progress bar
  * @param {Number} amount Amount in percent to increase the progress bar with
  */
 module.exports.increaseProgressBar = require("./lib/progressBar.js").increaseProgressBar;
