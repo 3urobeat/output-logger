@@ -27,8 +27,6 @@ This example will output the `info` message `My message` from the file `index.js
 &nbsp; 
 
 ## Functions
-### options({})
-- `{}` - Object that contains your custom options. Please see the [Options section](https://github.com/HerrEurobeat/output-logger#options)  
 
 ### (type, origin, message, nodate, remove)
 - `type` - String that determines the type of the log message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.  
@@ -47,6 +45,9 @@ Example:
 var logger = require("output-logger")
 logger("info", "index.js", "My message")
 ```  
+
+### options({})
+- `{}` - Object that contains your custom options. Please see the [Options section](https://github.com/HerrEurobeat/output-logger#options)  
 
 ### animation(name)
 - `name` - Can be `loading`, `waiting`, `bounce`, `progress`, `arrows` or `bouncearrows`.  
