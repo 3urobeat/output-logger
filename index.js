@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 01.06.2022 14:04:42
+ * Last Modified: 08.06.2022 10:51:07
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -48,6 +48,7 @@ module.exports = function () {
  * `animationinterval` - `Number`: Time in ms to wait between animation frames.  
  * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.  
  * `printdebug` - `Boolean`: Shows or hides log messages of type "debug".  
+ * `printprogress` - `Boolean`: Logs progress bar changes to outputfile if set to true.  
  */
 module.exports.options = require("./lib/options.js").options;
 
