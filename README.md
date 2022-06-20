@@ -75,7 +75,10 @@ logger.readInput("What is your name: ", 5000, (input) => {
     if (input) logger("info", "index.js", "User said: " + input)
         else logger("info", "index.js", "User did not respond after 5 seconds!")
 })
-```
+```  
+  
+> Note: Using an animation or a progress bar while using readInput is not (yet) supported.  
+  
 
 ### createProgressBar()
 No parameters.  

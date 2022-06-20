@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 08.06.2022 10:51:07
+ * Last Modified: 20.06.2022 18:17:37
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -110,12 +110,14 @@ module.exports.getProgressBar = require("./lib/progressBar.js").getProgressBar;
 
 
 
-//Attach exit event listeners in order to show cursor again if it was hidden by an animation
+//Attach exit event listeners in order to do some misc stuff before exiting
 const handleExit = require("./lib/events.js").handleExit
 
-process.on("SIGTERM", () => handleExit(true)  );
-process.on("SIGINT",  () => handleExit(true)  );
-process.on("exit",    () => handleExit(false) );
+process.on("SIGUSR1", () => handleExit("SIGUSR1"));
+process.on("SIGUSR2", () => handleExit("SIGUSR2"));
+process.on("SIGTERM", () => handleExit("SIGTERM"));
+process.on("SIGINT", () => handleExit("SIGINT"));
+process.on("exit", () => handleExit("exit"));
 
 
 /**
