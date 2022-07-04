@@ -77,7 +77,7 @@ logger.readInput("What is your name: ", 5000, (input) => {
 })
 ```  
   
-> Note: Using an animation or a progress bar while using readInput is not (yet) supported.  
+> Note: Showing an animation or a progress bar while using readInput is not (yet) supported. Both will be hidden temporarily while readInput is active.  
   
 
 ### createProgressBar()
