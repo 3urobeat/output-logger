@@ -131,6 +131,7 @@ Call the function `options` and pass an options object to configure the behaviou
 If you don't call this function after importing the library or you leave the object then these default options will be used:  
 ```
 defaultOptions = {
+    required_from_childprocess: false,
     msgstructure: `[${logger.Const.ANIMATION}] [${logger.Const.TYPE} | ${logger.Const.ORIGIN}] [${logger.Const.DATE}] ${logger.Const.MESSAGE}`,
     paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION],
     outputfile: "./output.txt",
@@ -141,6 +142,13 @@ defaultOptions = {
 }
 ```  
 If you don't provide a specific value then the corresponding default value will be used.  
+
+### required_from_childprocess   (Optional, only needed when you use the lib in multiple processes started by the same application)
+Set this to true if you are requiring the library in a child process and the parent process also already required the library.  
+This will disable start and exit related cursor movement and line clearing stuff so that both processes can share the same terminal stdout without making conflicting actions, resulting in missing messages etc.
+
+> **Note:** You need to handle a started animation, progress bar or message with remove set to true from the **same process!**  
+> You can't (for example) start an animation from process 1 and expect the other process to clear it when printing a message from there. Before process 2 can print, process 1 needs to stop the animation first to avoid weird results.
 
 ### msgstructure
 String that contains supported keywords that will be replaced by the value you give them when calling the logging function. Take a look at the example above where I listed the default values to understand.  

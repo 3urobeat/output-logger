@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 20.06.2022 18:17:37
+ * Last Modified: 15.07.2022 15:40:05
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -41,6 +41,7 @@ module.exports = function () {
  * Documentation with default values and examples: https://github.com/HerrEurobeat/output-logger#options-1  
  * 
  * Values that you can customize:  
+ * `required_from_childprocess` - Boolean: Set this to true if you are requiring the library in a child process and the parent process also already required the library.
  * `msgstructure` - `String`: String containing keywords that will be replaced by your parameters when calling the logger function. Allows you to customize the structure of your log message.  
  * `paramstructure` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
  * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
