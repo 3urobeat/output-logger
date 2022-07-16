@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 15.07.2022 15:40:05
+ * Last Modified: 16.07.2022 22:40:36
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -113,12 +113,13 @@ module.exports.getProgressBar = require("./lib/progressBar.js").getProgressBar;
 
 //Attach exit event listeners in order to do some misc stuff before exiting
 const handleExit = require("./lib/events.js").handleExit
+const events = {"SIGUSR1": null, "SIGUSR2": null, "SIGTERM": null, "SIGINT": null, "exit": null} //attach loop below will store references to event function where the nulls currently are to make detaching possible
 
-process.on("SIGUSR1", () => handleExit("SIGUSR1"));
-process.on("SIGUSR2", () => handleExit("SIGUSR2"));
-process.on("SIGTERM", () => handleExit("SIGTERM"));
-process.on("SIGINT", () => handleExit("SIGINT"));
-process.on("exit", () => handleExit("exit"));
+Object.keys(events).forEach((e) => process.on(e, events[e] = () => handleExit(e))) //attach handleExit() to all events and store reference of attached function as value of event name key in obj above
+
+
+//Provide detach function for example if user needs to clear cache and reimport lib without causing duplicate listeners
+module.exports.detachEventListeners = () => Object.keys(events).forEach((e) => process.removeListener(e, events[e])) //detach all our listeners using name and its corresponding function reference
 
 
 /**

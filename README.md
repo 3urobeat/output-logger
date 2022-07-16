@@ -105,7 +105,12 @@ Increases progress of the active progress bar.
 No parameters.  
 Returns these informations about the active progress bar as an Object:  
 - `progress` - Number between 0 and 100 representing the current progress of the active progress bar  
-  
+
+### detachEventListeners()
+No parameters.  
+Detaches all process event listeners attached by the library.  
+This is needed if you re-import the library after clearing the require cache to avoid creating duplicate event listeners.  
+(You probably don't need this function if you don't know that you need this function :D)  
 
 &nbsp; 
 
