@@ -15,7 +15,7 @@ Open a terminal in your project folder and type:
 ## Usage  
 Import it and call it:
 ```
-var logger = require("output-logger")
+let logger = require("output-logger")
 logger.options({}) //see section 'Options' below on how to configure the behaviour of the library
 
 logger("info", "index.js", "My message", false, true)
@@ -42,7 +42,7 @@ The message and the type & origin brackets will be colored accordingly to `type`
 This function has no name. To call it call the variable name under which you imported the library.  
 Example:  
 ```
-var logger = require("output-logger")
+let logger = require("output-logger")
 logger("info", "index.js", "My message")
 ```  
 

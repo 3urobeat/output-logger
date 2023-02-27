@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 16.07.2022 22:40:36
+ * Last Modified: 27.02.2023 20:48:16
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -29,7 +29,7 @@
  * @returns {String} The finished message  
  */
 module.exports = function () {
-    var args = [];
+    let args = [];
     for (let j = 0; j < arguments.length; ++j) args[j] = arguments[j]; //Use 'arguments' to basically have unlimited parameters. Credit: https://stackoverflow.com/a/6396066
 
     return require("./lib/logger.js").logger(args);
