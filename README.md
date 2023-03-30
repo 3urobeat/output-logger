@@ -28,13 +28,14 @@ This example will output the `info` message `My message` from the file `index.js
 
 ## Functions
 
-### (type, origin, message, nodate, remove)
+### (type, origin, message, nodate, remove, animation, customTimestamp)
 - `type` - String that determines the type of the log message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.  
 - `origin` - String that will show the origin file of your message. Can be an empty string to not use the field.  
 - `message` - String that is your message.  
 - `nodate` - Boolean that determines if your message should have no date. If false or undefined the date format will be `YYYY-MM-DD HH:MM:SS`  
 - `remove` - Boolean that determines if your message should be removed by the next line. The message will not be removed from the log file.  
 - `animation` - Array containing strings for every frame your animation should have or a call to the function animation("name") to use one of the default animations.  
+- `customTimestamp` - Number that changes the timestamp of the message being logged from now to a specific point in time. Overwrites `nodate`. Local timezone offset will be added to this timestamp.  
 
 The order of the parameters above can be changed. Take a look at `paramstructure` below in the 'Options' section!  
   
@@ -138,7 +139,7 @@ If you don't call this function after importing the library or you leave the obj
 defaultOptions = {
     required_from_childprocess: false,
     msgstructure: `[${logger.Const.ANIMATION}] [${logger.Const.TYPE} | ${logger.Const.ORIGIN}] [${logger.Const.DATE}] ${logger.Const.MESSAGE}`,
-    paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION],
+    paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION, "customTimestamp"],
     outputfile: "./output.txt",
     exitmessage: "",
     animationinterval: 750,
