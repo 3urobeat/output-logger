@@ -80,6 +80,10 @@ logger.readInput("What is your name: ", 5000, (input) => {
   
 > Note: Showing an animation or a progress bar while using readInput is not (yet) supported. Both will be hidden temporarily while readInput is active.  
   
+### stopReadInput(text)
+- `text` - (String) Optional: Text that should be logged into the existing input prompt  
+
+Stops an active readInput() prompt and optionally logs text into the running prompt
 
 ### createProgressBar()
 No parameters.  

@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 27.02.2023 20:48:16
+ * Last Modified: 30.03.2023 14:04:44
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -75,6 +75,13 @@ module.exports.stopAnimation = require("./lib/animation.js").stopAnimation;
  * @param {function} [callback] Called with `input` (String) on completion or `null` if user did not respond in timeout ms.
  */
 module.exports.readInput = require("./lib/readInput.js").readInput;
+
+
+/**
+ * Stops an active readInput() prompt and optionally logs text into the running prompt
+ * @param {String} text Optional: Text that should be logged into the existing input prompt
+ */
+module.exports.stopReadInput = require("./lib/readInput.js").stopReadInput;
 
 
 /**
