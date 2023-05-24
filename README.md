@@ -2,6 +2,13 @@
 A simple but effective node.js logging library with terminal input, file output, animation and progress bar support.  
 Customizeable behaviour and even parameter structure!  
 
+## Content
+- [Install](https://github.com/HerrEurobeat/output-logger#install)
+- [Usage](https://github.com/HerrEurobeat/output-logger#usage)
+- [Functions](https://github.com/HerrEurobeat/output-logger#functions)
+- [Colors](https://github.com/HerrEurobeat/output-logger#colors)
+- [Options](https://github.com/HerrEurobeat/output-logger#options)
+
 &nbsp; 
 
 ## Install
@@ -138,7 +145,7 @@ logger("info", "index.js", `${logger.colors.fgred}This message is red ${logger.c
   
 &nbsp; 
 
-## Options   
+## Options
 Call the function `options` and pass an options object to configure the behaviour of the library:  
 `logger.options({ outputfile: "./test.txt" })`  
 

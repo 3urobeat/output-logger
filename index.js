@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 30.03.2023 14:04:44
+ * Last Modified: 31.03.2023 17:24:28
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -26,6 +26,7 @@
  * `nodate` - `Boolean`: Set to true to remove date from message.  
  * `remove` - `Boolean`: Set to true to let next message erase this one. Doesn't affect output.txt.  
  * `animation` - `Array`: Set an animation that will be shown in the field 'animation'. Will be cleared by your next logger call or by calling logger.stopAnimation().  
+ * `customTimestamp` - `Number`: Changes the timestamp of the message being logged from now to a specific point in time. Overwrites `nodate`. Local timezone offset will be added to this timestamp.  
  * @returns {String} The finished message  
  */
 module.exports = function () {
