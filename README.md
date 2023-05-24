@@ -23,6 +23,10 @@ logger("info", "index.js", "My message", false, true)
 
 This example will output the `info` message `My message` from the file `index.js` with the current date and will get overwritten by the next new line in the terminal (but not replaced in the output.txt). The message will also be written to the file `output.txt` without any color codes:  
 `[2021-06-14 23:07:35] [INFO | index.js] My message`  
+  
+> Note: Many features don't work when starting with a process manager like pm2, unless you use `pm2 attach <process-id>` to view logs.  
+> This includes overwriting log messages, animations, progress bars and reading input from the user.  
+> Please consider using a normal `node` process to support all features.  
 
 &nbsp; 
 
