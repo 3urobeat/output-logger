@@ -7,7 +7,7 @@ Customizeable behaviour and even parameter structure!
 - [Usage](https://github.com/HerrEurobeat/output-logger#usage)
 - [Functions](https://github.com/HerrEurobeat/output-logger#functions)
 - [Colors](https://github.com/HerrEurobeat/output-logger#colors)
-- [Options](https://github.com/HerrEurobeat/output-logger#options)
+- [Options](https://github.com/HerrEurobeat/output-logger#options-1)
 
 &nbsp; 
 
