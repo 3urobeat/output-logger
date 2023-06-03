@@ -3,12 +3,12 @@
  * Project: output-logger
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
- * 
+ *
  * Last Modified: 03.06.2023 12:01:24
  * Modified By: 3urobeat
- * 
+ *
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
- * 
+ *
  * Licensed under the MIT license: https://opensource.org/licenses/MIT
  * Permission is granted to use, copy, modify, and redistribute the work.
  * Full license information available in the project LICENSE file.
@@ -31,10 +31,10 @@
  */
 module.exports = function () {
     let args = [];
-    for (let j = 0; j < arguments.length; ++j) args[j] = arguments[j]; //Use 'arguments' to basically have unlimited parameters. Credit: https://stackoverflow.com/a/6396066
+    for (let j = 0; j < arguments.length; ++j) args[j] = arguments[j]; // Use 'arguments' to basically have unlimited parameters. Credit: https://stackoverflow.com/a/6396066
 
     return require("./lib/logger.js").logger(args);
-}
+};
 
 
 /**
@@ -122,14 +122,14 @@ module.exports.getProgressBar = require("./lib/progressBar.js").getProgressBar;
 
 
 // Attach exit event listeners in order to do some misc stuff before exiting
-const handleExit = require("./lib/events.js").handleExit
-const events = {"SIGUSR1": null, "SIGUSR2": null, "SIGTERM": null, "SIGINT": null, "exit": null} //attach loop below will store references to event function where the nulls currently are to make detaching possible
+const handleExit = require("./lib/events.js").handleExit;
+const events = {"SIGUSR1": null, "SIGUSR2": null, "SIGTERM": null, "SIGINT": null, "exit": null}; // Attach loop below will store references to event function where the nulls currently are to make detaching possible
 
-Object.keys(events).forEach((e) => process.on(e, events[e] = () => handleExit(e))) //attach handleExit() to all events and store reference of attached function as value of event name key in obj above
+Object.keys(events).forEach((e) => process.on(e, events[e] = () => handleExit(e))); // Attach handleExit() to all events and store reference of attached function as value of event name key in obj above
 
 
 // Provide detach function for example if user needs to clear cache and reimport lib without causing duplicate listeners
-module.exports.detachEventListeners = () => Object.keys(events).forEach((e) => process.removeListener(e, events[e])) //detach all our listeners using name and its corresponding function reference
+module.exports.detachEventListeners = () => Object.keys(events).forEach((e) => process.removeListener(e, events[e])); // Detach all our listeners using name and its corresponding function reference
 
 
 /**
