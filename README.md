@@ -122,6 +122,8 @@ No parameters.
 Returns these informations about the active progress bar as an Object:  
 - `progress` - Number between 0 and 100 representing the current progress of the active progress bar  
 
+...or `null` if no progress bar is active.
+
 ### detachEventListeners()
 No parameters.  
 Detaches all process event listeners attached by the library.  
