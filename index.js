@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  * 
- * Last Modified: 31.03.2023 17:24:28
+ * Last Modified: 03.06.2023 12:01:24
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -51,14 +51,15 @@ module.exports = function () {
  * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.  
  * `printdebug` - `Boolean`: Shows or hides log messages of type "debug".  
  * `printprogress` - `Boolean`: Logs progress bar changes to outputfile if set to true.  
+ * @param {{ required_from_childprocess: boolean, msgstructure: string, paramstructure: array.<string>, outputfile: string, exitmessage: string, animationinterval: number, animationinoutputfile: boolean, printdebug: boolean, printprogress: boolean }} customOptions Object containing key & value pairs of the setting you'd like to change
  */
 module.exports.options = require("./lib/options.js").options;
 
 
 /**
- * Returns one of the default animations
- * @param {String} animation Valid animations: `loading`, `waiting`, `bounce`, `progress`, `arrows` or `bouncearrows`
- * @returns Array of the chosen animation
+ * Returns the array of frames for the provided animation name
+ * @param {string} animation Valid animation names: `loading`, `waiting`, `bounce`, `progress`, `arrows` or `bouncearrows`
+ * @returns {array.<string>} Array containing all frames as strings of the chosen animation
  */
 module.exports.animation = require("./lib/animation.js").animation;
 
@@ -71,8 +72,8 @@ module.exports.stopAnimation = require("./lib/animation.js").stopAnimation;
 
 /**
  * Waits for input from the terminal and returns it in a callback (logger() calls while waiting for input will be queued and logged after callback)
- * @param {String} question Ask user something before waiting for input. Pass a line break manually at the end of your String if user input should appear below this message, it will otherwise appear behind it. Pass empty String to disable.
- * @param {Number} timeout Time in ms after which a callback will be made if user does not respond. Pass 0 to disable (not recommended as your application can get stuck)
+ * @param {string} question Ask user something before waiting for input. Pass a line break manually at the end of your String if user input should appear below this message, it will otherwise appear behind it. Pass empty String to disable.
+ * @param {number} timeout Time in ms after which a callback will be made if user does not respond. Pass 0 to disable (not recommended as your application can get stuck)
  * @param {function} [callback] Called with `input` (String) on completion or `null` if user did not respond in timeout ms.
  */
 module.exports.readInput = require("./lib/readInput.js").readInput;
@@ -80,53 +81,54 @@ module.exports.readInput = require("./lib/readInput.js").readInput;
 
 /**
  * Stops an active readInput() prompt and optionally logs text into the running prompt
- * @param {String} text Optional: Text that should be logged into the existing input prompt
+ * @param {string} text Optional: Text that should be logged into the existing input prompt
  */
 module.exports.stopReadInput = require("./lib/readInput.js").stopReadInput;
 
 
 /**
  * Creates new empty progress bar or overwrites existing one
+ * @param {boolean} dontShow Set to true if this function shouldn't immediately call showProgress() (for example if you are doing it yourself right after)
  */
 module.exports.createProgressBar = require("./lib/progressBar.js").createProgressBar;
 
 
 /**
- * Removes the active progress bar
+ * Removes an active progress bar
  */
 module.exports.removeProgressBar = require("./lib/progressBar.js").removeProgressBar;
 
 
 /**
- * Set progress of the active progress bar to a specific value
- * @param {Number} amount Number between 0 and 100 to set the progress bar to
+ * Set progress of an active progress bar to a specific value
+ * @param {number} amount Amount in percent to set the progress bar to
  */
 module.exports.setProgressBar = require("./lib/progressBar.js").setProgressBar;
 
 
 /**
- * Increases progress of the active progress bar
- * @param {Number} amount Number between 0 and 100 to increase the progress bar with
+ * Increases progress of an active progress bar
+ * @param {number} amount Amount in percent to increase the progress bar with
  */
 module.exports.increaseProgressBar = require("./lib/progressBar.js").increaseProgressBar;
 
 
 /**
  * Returns information about the active progress bar
- * @returns Object containing information about the active progress bar
+ * @returns {{ progress: number } | null} Object containing information about the active progress bar or null if none is active
  */
 module.exports.getProgressBar = require("./lib/progressBar.js").getProgressBar;
 
 
 
-//Attach exit event listeners in order to do some misc stuff before exiting
+// Attach exit event listeners in order to do some misc stuff before exiting
 const handleExit = require("./lib/events.js").handleExit
 const events = {"SIGUSR1": null, "SIGUSR2": null, "SIGTERM": null, "SIGINT": null, "exit": null} //attach loop below will store references to event function where the nulls currently are to make detaching possible
 
 Object.keys(events).forEach((e) => process.on(e, events[e] = () => handleExit(e))) //attach handleExit() to all events and store reference of attached function as value of event name key in obj above
 
 
-//Provide detach function for example if user needs to clear cache and reimport lib without causing duplicate listeners
+// Provide detach function for example if user needs to clear cache and reimport lib without causing duplicate listeners
 module.exports.detachEventListeners = () => Object.keys(events).forEach((e) => process.removeListener(e, events[e])) //detach all our listeners using name and its corresponding function reference
 
 
