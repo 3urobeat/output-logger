@@ -1,6 +1,6 @@
 # output-logger
-A simple but effective node.js logging library with terminal input, file output, animation and progress bar support.  
-Customizeable behaviour and even parameter structure!  
+A node.js logging library with terminal input, file output, animation and progress bar support.  
+Furthermore it features customizeable behaviour and even parameter structure!  
 
 ## Content
 - [Install](https://github.com/HerrEurobeat/output-logger#install)
