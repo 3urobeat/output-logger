@@ -39,13 +39,14 @@ This example will output the `info` message `My message` from the file `index.js
 
 ## Functions
 
-### (type, origin, message, nodate, remove, animation, customTimestamp)
+### (type, origin, message, nodate, remove, animation, cutToWidth, customTimestamp)
 - `type` - String that determines the type of the log message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.  
 - `origin` - String that will show the origin file of your message. Can be an empty string to not use the field.  
 - `message` - String that is your message.  
 - `nodate` - Boolean that determines if your message should have no date. If false or undefined the date format will be `YYYY-MM-DD HH:MM:SS`  
 - `remove` - Boolean that determines if your message should be removed by the next line. The message will not be removed from the log file.  
 - `animation` - Array containing strings for every frame your animation should have or a call to the function animation("name") to use one of the default animations.  
+- `cutToWidth` - Boolean that determines if each line of `str` should be force cut to the current terminal width. Setting will be ignored if terminal is not a TTY.  
 - `customTimestamp` - Number that changes the timestamp of the message being logged from now to a specific point in time. Overwrites `nodate`. Local timezone offset will be added to this timestamp.  
 
 The order of the parameters above can be changed. Take a look at `paramstructure` below in the 'Options' section!  
@@ -156,7 +157,7 @@ If you don't call this function after importing the library or you leave the obj
 defaultOptions = {
     required_from_childprocess: false,
     msgstructure: `[${logger.Const.ANIMATION}] [${logger.Const.TYPE} | ${logger.Const.ORIGIN}] [${logger.Const.DATE}] ${logger.Const.MESSAGE}`,
-    paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION, "customTimestamp"],
+    paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION, "cutToWidth", "customTimestamp"],
     outputfile: "./output.txt",
     exitmessage: "",
     animationinterval: 750,
@@ -180,7 +181,8 @@ This allows you to customize the structure of your log message.
 > Note: Please only use square or round brackets to surround keywords and pipes between keywords inside brackets as of now.  
 
 ### paramstructure  
-Array that contains logger.Const strings in the order you would like to have the parameters of the logger function. This allows you to prioritize parameters that you use often by being able to call them before others.  
+Array that contains logger.Const strings (except for the raw booleans shown above) in the order you would like to have the parameters of the logger function.  
+This allows you to prioritize parameters that you use often by being able to call them before others.  
 Take a look at the `defaultOptions` above to see all supported parameters. Shift around the array as you like to change the order.  
 If you don't provide all supported parameters then you won't be able to use the parameters you left out.  
 

@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  *
- * Last Modified: 03.06.2023 12:01:24
+ * Last Modified: 08.06.2023 10:57:33
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -26,6 +26,7 @@
  * `nodate` - `Boolean`: Set to true to remove date from message.  
  * `remove` - `Boolean`: Set to true to let next message erase this one. Doesn't affect output.txt.  
  * `animation` - `Array`: Set an animation that will be shown in the field 'animation'. Will be cleared by your next logger call or by calling logger.stopAnimation().  
+ * `cutToWidth` - `Boolean`: Set to true to force cut each line of `str` to the current terminal width. Setting will be ignored if terminal is not a TTY.  
  * `customTimestamp` - `Number`: Changes the timestamp of the message being logged from now to a specific point in time. Overwrites `nodate`. Local timezone offset will be added to this timestamp.  
  * @returns {String} The finished message  
  */
@@ -42,7 +43,7 @@ module.exports = function () {
  * Documentation with default values and examples: https://github.com/HerrEurobeat/output-logger#options-1  
  * 
  * Values that you can customize:  
- * `required_from_childprocess` - Boolean: Set this to true if you are requiring the library in a child process and the parent process also already required the library.
+ * `required_from_childprocess` - Boolean: Set this to true if you are requiring the library in a child process and the parent process also already required the library.  
  * `msgstructure` - `String`: String containing keywords that will be replaced by your parameters when calling the logger function. Allows you to customize the structure of your log message.  
  * `paramstructure` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
  * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
