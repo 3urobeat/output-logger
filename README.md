@@ -160,6 +160,7 @@ defaultOptions = {
     paramstructure: [logger.Const.TYPE, logger.Const.ORIGIN, logger.Const.MESSAGE, "nodate", "remove", logger.Const.ANIMATION, "cutToWidth", "customTimestamp"],
     outputfile: "./output.txt",
     exitmessage: "",
+    alwaysCutToWidth: false,
     animationinterval: 750,
     animationinoutputfile: false,
     printdebug: false
@@ -195,6 +196,11 @@ String which points to the file the library should write the output to (path). P
 
 ### exitmessage  
 A last message that will be printed when the application exits. Leave the string empty to disable the feature.  
+
+### alwaysCutToWidth
+Setting this to true will always cut every message to the width of the terminal. This setting only works when the terminal is a TTY!  
+If you only want to cut certain messages, check out the `cutToWidth` logger parameter.  
+Active animations and messages with `remove` set to `true` will always be cut.  
   
 ### animationinterval
 Time in ms to wait between animation frames.  

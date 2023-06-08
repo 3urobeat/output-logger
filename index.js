@@ -4,7 +4,7 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  *
- * Last Modified: 08.06.2023 10:57:33
+ * Last Modified: 08.06.2023 11:13:49
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -48,11 +48,12 @@ module.exports = function () {
  * `paramstructure` - `Array<String>`: Array containing strings in the order you would like to have the parameters of the logger function. Allows you to prioritize parameters that you use more often.  
  * `outputfile` - `String`: Path to where you want to have your outputfile. Leave the string empty to disable the feature.  
  * `exitmessage` - `String`: A last message that will be printed when the application exits. Leave the string empty to disable the feature.  
+ * `alwaysCutToWidth` - `Boolean`: Setting this to true will always cut every message to the width of the terminal. This setting only works when the terminal is a TTY!  
  * `animationinterval` - `Number`: Time in ms to wait between animation frames.  
  * `animationinoutputfile` - `Boolean`: Print the first frame of the used animation to the outputfile.  
  * `printdebug` - `Boolean`: Shows or hides log messages of type "debug".  
  * `printprogress` - `Boolean`: Logs progress bar changes to outputfile if set to true.  
- * @param {{ required_from_childprocess: boolean, msgstructure: string, paramstructure: array.<string>, outputfile: string, exitmessage: string, animationinterval: number, animationinoutputfile: boolean, printdebug: boolean, printprogress: boolean }} customOptions Object containing key & value pairs of the setting you'd like to change
+ * @param {{ required_from_childprocess: boolean, msgstructure: string, paramstructure: array.<string>, outputfile: string, exitmessage: string, alwaysCutToWidth: boolean, animationinterval: number, animationinoutputfile: boolean, printdebug: boolean, printprogress: boolean }} customOptions Object containing key & value pairs of the setting you'd like to change
  */
 module.exports.options = require("./lib/options.js").options;
 
