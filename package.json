@@ -1,6 +1,6 @@
 {
     "name": "output-logger",
-    "version": "2.3.5",
+    "version": "2.3.6",
     "description": "A simple but effective node.js logging library with terminal input, file output, animation and progress bar support.",
     "keywords": [
         "npm",
