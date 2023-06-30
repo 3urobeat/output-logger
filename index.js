@@ -4,10 +4,10 @@
  * Created Date: 15.06.2021 15:38:00
  * Author: 3urobeat
  *
- * Last Modified: 08.06.2023 11:13:49
+ * Last Modified: 30.06.2023 09:50:13
  * Modified By: 3urobeat
  *
- * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
+ * Copyright (c) 2022 3urobeat <https://github.com/3urobeat>
  *
  * Licensed under the MIT license: https://opensource.org/licenses/MIT
  * Permission is granted to use, copy, modify, and redistribute the work.
@@ -17,7 +17,7 @@
 
 /**
  * Logs your message to the terminal and to your output file. The order of parameters depends on your paramstructure.  
- * If you are using the default values please see here: https://github.com/HerrEurobeat/output-logger#functions  
+ * If you are using the default values please see here: https://github.com/3urobeat/output-logger#functions  
  *   
  * Parameter types (in default order):  
  * `type` - `String`: Type of your message. Can be `info`, `warn`, `error`, `debug` or an empty string to not use the field.  
@@ -40,7 +40,7 @@ module.exports = function () {
 
 /**
  * Provide custom options if you wish inside an `Object`.  
- * Documentation with default values and examples: https://github.com/HerrEurobeat/output-logger#options-1  
+ * Documentation with default values and examples: https://github.com/3urobeat/output-logger#options-1  
  * 
  * Values that you can customize:  
  * `required_from_childprocess` - Boolean: Set this to true if you are requiring the library in a child process and the parent process also already required the library.  

@@ -3,11 +3,11 @@ A node.js logging library with terminal input, file output, animation and progre
 Furthermore it features customizeable behaviour and even parameter structure!  
 
 ## Content
-- [Install](https://github.com/HerrEurobeat/output-logger#install)
-- [Usage](https://github.com/HerrEurobeat/output-logger#usage)
-- [Functions](https://github.com/HerrEurobeat/output-logger#functions)
-- [Colors](https://github.com/HerrEurobeat/output-logger#colors)
-- [Options](https://github.com/HerrEurobeat/output-logger#options-1)
+- [Install](https://github.com/3urobeat/output-logger#install)
+- [Usage](https://github.com/3urobeat/output-logger#usage)
+- [Functions](https://github.com/3urobeat/output-logger#functions)
+- [Colors](https://github.com/3urobeat/output-logger#colors)
+- [Options](https://github.com/3urobeat/output-logger#options-1)
 
 &nbsp; 
 
@@ -60,7 +60,7 @@ logger("info", "index.js", "My message")
 ```  
 
 ### options({})
-- `{}` - Object that contains your custom options. Please see the [Options section](https://github.com/HerrEurobeat/output-logger#options)  
+- `{}` - Object that contains your custom options. Please see the [Options section](https://github.com/3urobeat/output-logger#options)  
 
 ### animation(name)
 - `name` - Can be `loading`, `waiting`, `bounce`, `progress`, `arrows` or `bouncearrows`.  
@@ -135,7 +135,7 @@ This is needed if you re-import the library after clearing the require cache to 
 
 ## Colors
 You can easily use color codes in your message by using `logger.colors`!  
-Take a look at your IntelliSense popup or look at [the file directly](https://github.com/HerrEurobeat/output-logger/blob/master/lib/data/colors.js) to see all supported colors. 
+Take a look at your IntelliSense popup or look at [the file directly](https://github.com/3urobeat/output-logger/blob/master/lib/data/colors.js) to see all supported colors. 
 > `fg` means foreground, `bg` means background. `brfg` and `brbg` mean bright foreground and bright background.  
   
 Usage Example:  
