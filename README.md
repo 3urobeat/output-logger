@@ -1,8 +1,6 @@
-&nbsp; 
-
 <div align="center">
     <h1>output-logger</h1>
-    <h3>A node.js logging library to supercharge your CLI presence!</h3>
+    <h4>A node.js logging library to supercharge your CLI presence!</h4>
     <div>
         <a href="#features">Features</a> •
         <a href="#install">Install</a> •
