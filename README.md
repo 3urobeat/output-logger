@@ -1,34 +1,50 @@
-# output-logger
-A node.js logging library with terminal input, file output, animation and progress bar support.  
-Furthermore it features customizeable behaviour and even parameter structure!  
+<div align="center">
+    <p style="font-size: 2rem; font-weight: bold; margin-top: 3rem">output-logger</p>  
+    <p style="font-size: 1.25rem; margin-top: -0.75rem">A node.js logging library to supercharge your CLI presence!</p>
+    <div style="margin-top: -0.5rem">
+        <a href="#features">Features</a> •
+        <a href="#install">Install</a> •
+        <a href="#usage">Usage</a> •
+        <a href="#functions">Functions</a> •
+        <a href="#colors">Colors</a> •
+        <a href="#options-1">Options</a>
+    </div>
+    <img src="./.github/img/demo.gif">
+</div>
 
-## Content
-- [Install](https://github.com/3urobeat/output-logger#install)
-- [Usage](https://github.com/3urobeat/output-logger#usage)
-- [Functions](https://github.com/3urobeat/output-logger#functions)
-- [Colors](https://github.com/3urobeat/output-logger#colors)
-- [Options](https://github.com/3urobeat/output-logger#options-1)
+## Features
+- Colored log levels: Info, Warn, Error & Debug
+- Keep track of every log message with a output file
+- Read terminal input from the user
+- Display file name to keep track of log origins even in large projects
+- Overwrite a log message with the next one by enabling *remove*
+- Animations: 6 are shipped by default
+- Progress Bars
+- Automatic and manual cutting of log lines to the current terminal width
+- Customizeable settings: Parameter structure, message structure, disabling of debug messages, etc.
 
 &nbsp; 
 
 ## Install
-> Note: If you are here from GitHub **Packages** please use the npm package with the command below instead of the scoped GitHub command from above. It won't work.  
+Open a terminal in your project folder and run:  
+\> `npm install output-logger`
 
-Open a terminal in your project folder and type:  
-`npm install output-logger`
+Do not use the scoped *GitHub Packages* command, it will not work.
 
 &nbsp; 
 
 ## Usage  
-Import it and call it:
 ```
-let logger = require("output-logger")
-logger.options({}) //see section 'Options' below on how to configure the behaviour of the library
+const logger = require("output-logger");
 
-logger("info", "index.js", "My message", false, true)
+// Default paramstructure: log level, origin, message, nodate, remove
+logger("info", "index.js", "My message", false, true);
 ```  
 
-This example will output the `info` message `My message` from the file `index.js` with the current date and will get overwritten by the next new line in the terminal (but not replaced in the output.txt). The message will also be written to the file `output.txt` without any color codes:  
+This example will output the `info` message `My message` from the file `index.js` with the current date.
+It will get overwritten by the next new line in the terminal (but not in the output.txt file).  
+
+The message will also be written to the file `output.txt` stripped of any color codes:  
 `[2021-06-14 23:07:35] [INFO | index.js] My message`  
   
 > Note: Many features don't work when starting with a process manager like pm2, unless you use `pm2 attach <process-id>` to view logs.  
