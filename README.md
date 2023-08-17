@@ -1,7 +1,9 @@
+&nbsp; 
+
 <div align="center">
-    <p style="font-size: 2rem; font-weight: bold; margin-top: 3rem">output-logger</p>  
-    <p style="font-size: 1.25rem; margin-top: -0.75rem">A node.js logging library to supercharge your CLI presence!</p>
-    <div style="margin-top: -0.5rem">
+    <h1>output-logger</h1>
+    <h3>A node.js logging library to supercharge your CLI presence!</h3>
+    <div>
         <a href="#features">Features</a> •
         <a href="#install">Install</a> •
         <a href="#usage">Usage</a> •
