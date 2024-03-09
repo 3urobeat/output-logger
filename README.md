@@ -1,6 +1,6 @@
 <div align="center">
     <h1>output-logger</h1>
-    <h4>A node.js logging library to supercharge your CLI presence!</h4>
+    <h4>Supercharge your CLI presence!</h4>
     <div>
         <a href="#features">Features</a> •
         <a href="#install">Install</a> •
@@ -46,8 +46,9 @@ It will get overwritten by the next new line in the terminal (but not in the out
 
 The message will also be written to the file `output.txt` stripped of any color codes:  
 `[2021-06-14 23:07:35] [INFO | index.js] My message`  
-  
-> Note: Many features don't work when starting with a process manager like pm2, unless you use `pm2 attach <process-id>` to view logs.  
+
+> [!IMPORTANT]
+> Some features might not work correctly when starting with a process manager like pm2, unless you use `pm2 attach <process-id>` to view logs.  
 > This includes overwriting log messages, animations, progress bars and reading input from the user.  
 > Please consider using a normal `node` process to support all features.  
 
@@ -106,7 +107,8 @@ logger.readInput("What is your name: ", 5000, (input) => {
 })
 ```  
   
-> Note: Showing an animation or a progress bar while using readInput is not (yet) supported. Both will be hidden temporarily while readInput is active.  
+> [!NOTE]
+> Any active animation or progress bar, as well as new messages, will temporarily be hidden while `readInput()` is active
   
 ### stopReadInput(text)
 - `text` - (String) Optional: Text that should be logged into the existing input prompt  
@@ -158,9 +160,12 @@ Usage Example:
 ```
 logger("info", "index.js", `${logger.colors.fgred}This message is red ${logger.colors.fggreen}but now it's green!`)
 ```
-> Note: The library will always reset the color at the end of your message automatically. You can use `logger.colors.reset` to do this manually aswell.  
+> [!NOTE]
+> The library will always reset the color at the end of your message automatically.  
+> You can use `logger.colors.reset` to do this manually as well.  
   
-> Tip: Use \` to start and end your string (like in the example) to use variables inside Strings more easily using `${ }`.
+> [!TIP]
+> Use ``` ` ``` to start and end your string (like in the example) to easily use variables using `${ }`.
   
 &nbsp; 
 
@@ -188,14 +193,13 @@ If you don't provide a specific value then the corresponding default value will 
 Set this to true if you are requiring the library in a child process and the parent process also already required the library.  
 This will disable start and exit related cursor movement and line clearing stuff so that both processes can share the same terminal stdout without making conflicting actions, resulting in missing messages etc.
 
-> **Note:** You need to handle a started animation, progress bar or message with remove set to true from the **same process!**  
-> You can't (for example) start an animation from process 1 and expect the other process to clear it when printing a message from there. Before process 2 can print, process 1 needs to stop the animation first to avoid weird results.
+> [!NOTE]
+> You need to handle a started animation, progress bar or message with remove enabled from the **same process!**  
+> You can't (for example) start an animation from process 1 and expect the other process to clear it when logging. Before process 2 can print, process 1 needs to stop the animation first.
 
 ### msgstructure
 String that contains supported keywords that will be replaced by the value you give them when calling the logging function. Take a look at the example above where I listed the default values to understand.  
 This allows you to customize the structure of your log message.  
-
-> Note: Please only use square or round brackets to surround keywords and pipes between keywords inside brackets as of now.  
 
 ### paramstructure  
 Array that contains logger.Const strings (except for the raw booleans shown above) in the order you would like to have the parameters of the logger function.  
