@@ -1,5 +1,4 @@
+/node_modules
+/build
+*.js
 output-logger.code-workspace
-node_modules
-output-logger-*.tgz
-test.js
-output.txt

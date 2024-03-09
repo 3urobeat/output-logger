@@ -1,23 +1,30 @@
 {
     /*
-        3urobeat's EsLint Config. Requires eslint & eslint-plugin-jsdoc to be installed as devDependencies.
+        3urobeat's EsLint Config. (Typescript Variant)
         https://github.com/3urobeat
     */
 
+    "root": true,
     "env": {
         "commonjs": true,
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 11
     },
     "plugins": [
+        "@typescript-eslint",
         "jsdoc"
     ],
     "rules": {

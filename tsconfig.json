@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2022",
+        "declaration": true,
+        "outDir": "./build"
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
