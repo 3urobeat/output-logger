@@ -1,42 +1,39 @@
 {
     "name": "output-logger",
     "version": "2.3.7",
-    "description": "A simple but effective node.js logging library with terminal input, file output, animation and progress bar support.",
+    "description": "A node.js logging library with terminal input, file output, animation and progress bar support ",
     "keywords": [
-        "npm",
-        "library",
+        "log",
         "logging",
-        "file logging",
-        "logger",
-        "file logger",
-        "console.log"
+        "animation",
+        "progress-bar"
     ],
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "types": "jsdoc -t node_modules/tsd-jsdoc/dist -r index.js -r lib/. -d types"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/3urobeat/output-logger.git"
-    },
-    "publishConfig": {
-        "registry": "https://registry-url"
-    },
-    "author": "3urobeat",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/3urobeat/output-logger/issues"
-    },
-    "homepage": "https://github.com/3urobeat/output-logger#readme",
     "dependencies": {
         "fs": "*",
         "readline": "^1.3.0"
     },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^7.1.1",
+        "@typescript-eslint/parser": "^7.1.1",
         "eslint": "^8.57.0",
-        "eslint-plugin-jsdoc": "^48.2.1",
-        "tsd-jsdoc": "^2.5.0"
+        "eslint-plugin-jsdoc": "^48.2.1"
     },
-    "types": "./types/types.d.ts"
+    "scripts": {
+        "build": "tsc"
+    },
+    "files": [
+        "/build"
+    ],
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "author": "3urobeat",
+    "license": "GPL-3.0",
+    "homepage": "https://github.com/3urobeat",
+    "repository": "https://github.com/3urobeat/output-logger",
+    "bugs": {
+        "url": "https://github.com/3urobeat/output-logger/issues"
+    },
+    "publishConfig": {
+        "registry": "https://registry-url"
+    }
 }

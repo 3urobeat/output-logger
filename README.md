@@ -34,7 +34,7 @@ Do not use the scoped *GitHub Packages* command, it will not work.
 &nbsp; 
 
 ## Usage  
-```
+```js
 const logger = require("output-logger");
 
 // Default paramstructure: log level, origin, message, nodate, remove
