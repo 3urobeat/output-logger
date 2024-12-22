@@ -76,7 +76,7 @@ logger("info", "index.js", "My message")
 ```  
 
 ### options({})
-- `{}` - Object that contains your custom options. Please see the [Options section](https://github.com/3urobeat/output-logger#options)  
+- `{}` - Object that contains your custom options. Please see the [Options section](https://github.com/3urobeat/output-logger#options-1)  
 
 ### animation(name)
 - `name` - Can be `loading`, `waiting`, `bounce`, `progress`, `arrows` or `bouncearrows`.  
