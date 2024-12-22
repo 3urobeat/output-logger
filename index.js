@@ -1,13 +1,13 @@
 /*
  * File: index.js
  * Project: output-logger
- * Created Date: 15.06.2021 15:38:00
+ * Created Date: 2021-06-15 15:38:00
  * Author: 3urobeat
  *
- * Last Modified: 30.06.2023 09:50:13
+ * Last Modified: 2024-12-22 15:45:10
  * Modified By: 3urobeat
  *
- * Copyright (c) 2022 3urobeat <https://github.com/3urobeat>
+ * Copyright (c) 2022 - 2024 3urobeat <https://github.com/3urobeat>
  *
  * Licensed under the MIT license: https://opensource.org/licenses/MIT
  * Permission is granted to use, copy, modify, and redistribute the work.
