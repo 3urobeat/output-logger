@@ -1,7 +1,7 @@
 {
     "name": "output-logger",
-    "version": "2.3.7",
-    "description": "A simple but effective node.js logging library with terminal input, file output, animation and progress bar support.",
+    "version": "2.3.8",
+    "description": "Powerful JavaScript logging library with input, file output, animation and progress bar support!",
     "keywords": [
         "npm",
         "library",
@@ -9,7 +9,7 @@
         "file logging",
         "logger",
         "file logger",
-        "console.log" 
+        "console.log"
     ],
     "main": "index.js",
     "scripts": {
@@ -22,7 +22,7 @@
     },
     "publishConfig": {
         "registry": "https://registry-url"
-    }, 
+    },
     "author": "3urobeat",
     "license": "MIT",
     "bugs": {
