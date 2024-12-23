@@ -1,0 +1,8 @@
+.github/img/
+.github/workflows/
+node_modules/
+.eslintrc.json
+output-logger.code-workspace
+output-logger-*.tgz
+test.js
+output.txt
